@@ -10,7 +10,6 @@ import com.example.repository.UserRepository;
 
 @Service
 public class UserService {
-	
 	@Autowired
 	private UserRepository userRepository;
 	
@@ -52,8 +51,7 @@ public class UserService {
 		return false;
 	}
 	
-	public List<User> getUserByNome(String nome){
-		return this.userRepository.findAllByNome(nome);
+	public List<User> getUserByNome(String name){
+		return this.userRepository.findAllByName(name);
 	}
-
 }
