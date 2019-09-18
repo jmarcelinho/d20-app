@@ -58,7 +58,7 @@ public class GameController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> remover(@PathVariable Integer id) {
+	public ResponseEntity<Void> erase(@PathVariable Integer id) {
 		boolean t = this.gameService.delete(id);
 		
 		if (!t) {
