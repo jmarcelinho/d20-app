@@ -1,12 +1,12 @@
-package com.example.services;
+package com.example.d20.services;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.model.Game;
-import com.example.repository.GameRepository;
+import com.example.d20.model.Game;
+import com.example.d20.repository.GameRepository;
 
 @Service
 public class GameService {

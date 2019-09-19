@@ -1,4 +1,4 @@
-package com.example.controllers;
+package com.example.d20.controllers;
 
 import java.util.List;
 
@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.model.Ownership;
-import com.example.services.OwnershipService;
+import com.example.d20.model.Ownership;
+import com.example.d20.services.OwnershipService;
 
 @RestController
 @CrossOrigin

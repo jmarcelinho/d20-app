@@ -1,4 +1,4 @@
-package com.example.controllers;
+package com.example.d20.controllers;
 
 import java.util.List;
 
@@ -16,50 +16,50 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.model.User;
-import com.example.services.UserService;
+import com.example.d20.model.Game;
+import com.example.d20.services.GameService;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/game")
+public class GameController {
 	@Autowired
-	private UserService userService;
+	private GameService gameService;
 	
 	@GetMapping
-	public List<User> getAll() {
-		return this.userService.getAllUsers();
+	public List<Game> getAll() {
+		return this.gameService.getAllGames();
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<User> getUsuarioById(@PathVariable Integer id){
-		User user = this.userService.getUserById(id);
+	public ResponseEntity<Game> getGameById(@PathVariable Integer id){
+		Game game = this.gameService.getGameById(id);
 		
-		if(user == null) {
+		if(game == null) {
 			return ResponseEntity.notFound().build();
 		}
 		
-		return ResponseEntity.ok(user);
+		return ResponseEntity.ok(game);
 	}
 	
 	@PostMapping
-	public ResponseEntity<User> add(@Valid @RequestBody User userBody){
-		User user = this.userService.addUser(userBody);
-		return ResponseEntity.ok(user);
+	public ResponseEntity<Game> add(@Valid @RequestBody Game gameBody){
+		Game game = this.gameService.addGame(gameBody);
+		return ResponseEntity.ok(game);
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<User> update(@PathVariable Integer id, @Valid @RequestBody User userBody){
-		User user = this.userService.updateUser(id, userBody);
-		if(user == null) {
+	public ResponseEntity<Game> update(@PathVariable Integer id, @Valid @RequestBody Game gameBody){
+		Game game = this.gameService.updateGame(id, gameBody);
+		if(game == null) {
 			return ResponseEntity.notFound().build();
 		}
-		return ResponseEntity.ok(user);
+		return ResponseEntity.ok(game);
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> erase(@PathVariable Integer id) {
-		boolean t = this.userService.delete(id);
+		boolean t = this.gameService.delete(id);
 		
 		if (!t) {
 			return ResponseEntity.notFound().build();

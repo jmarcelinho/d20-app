@@ -1,12 +1,12 @@
-package com.example.repository;
+package com.example.d20.repository;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.model.Ownership;
-import com.example.model.User;
+import com.example.d20.model.Ownership;
+import com.example.d20.model.User;
 
 @Repository
 public interface OwnershipRepository extends JpaRepository<Ownership, Integer>{

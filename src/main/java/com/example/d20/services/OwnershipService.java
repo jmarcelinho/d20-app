@@ -1,13 +1,13 @@
-package com.example.services;
+package com.example.d20.services;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.model.Ownership;
-import com.example.model.User;
-import com.example.repository.OwnershipRepository;
+import com.example.d20.model.Ownership;
+import com.example.d20.model.User;
+import com.example.d20.repository.OwnershipRepository;
 
 @Service
 public class OwnershipService {
