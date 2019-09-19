@@ -12,6 +12,7 @@ import javax.persistence.Table;
 public class Game {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "idGame")
 	private Integer Id;
 	
 	@Column(name = "name")

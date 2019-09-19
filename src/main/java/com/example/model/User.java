@@ -3,21 +3,24 @@ package com.example.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "tb_user")
 public class User {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(generator = "increment")
+	@GenericGenerator(name = "increment", strategy = "increment")
+	@Column(name = "idUser")
 	private Integer Id;
 	
 	@Column(name = "name")
 	private String name;
 	
-	@Column(name = "bank_info")
+	@Column(name = "bankInfo")
 	private String bankInfo;
 	
 	@Column(name = "credCard")
@@ -31,7 +34,7 @@ public class User {
 	
 	@Column(name = "email")
 	private String email;
-	
+	public User() {}
 	public User(String name, String bankInfo, String credCard, String cpf, String telephone, String email) {
 		this.name = name;
 		this.bankInfo = bankInfo;
