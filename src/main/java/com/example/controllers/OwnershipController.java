@@ -16,50 +16,50 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.model.User;
-import com.example.services.UserService;
+import com.example.model.Ownership;
+import com.example.services.OwnershipService;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/ownership")
+public class OwnershipController {
 	@Autowired
-	private UserService userService;
+	private OwnershipService ownershipService;
 	
 	@GetMapping
-	public List<User> getAll() {
-		return this.userService.getAllUsers();
+	public List<Ownership> getAll() {
+		return this.ownershipService.getAllOwnerships();
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<User> getUsuarioById(@PathVariable Integer id){
-		User user = this.userService.getUserById(id);
+	public ResponseEntity<Ownership> getOwnershipById(@PathVariable Integer id){
+		Ownership ownership = this.ownershipService.getOwnershipById(id);
 		
-		if(user == null) {
+		if(ownership == null) {
 			return ResponseEntity.notFound().build();
 		}
 		
-		return ResponseEntity.ok(user);
+		return ResponseEntity.ok(ownership);
 	}
 	
 	@PostMapping
-	public ResponseEntity<User> add(@Valid @RequestBody User userBody){
-		User user = this.userService.addUser(userBody);
-		return ResponseEntity.ok(user);
+	public ResponseEntity<Ownership> add(@Valid @RequestBody Ownership ownershipBody){
+		Ownership ownership = this.ownershipService.addOwnership(ownershipBody);
+		return ResponseEntity.ok(ownership);
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<User> update(@PathVariable Integer id, @Valid @RequestBody User userBody){
-		User user = this.userService.updateUser(id, userBody);
-		if(user == null) {
+	public ResponseEntity<Ownership> update(@PathVariable Integer id, @Valid @RequestBody Ownership ownershipBody){
+		Ownership ownership = this.ownershipService.updateOwnership(id, ownershipBody);
+		if(ownership == null) {
 			return ResponseEntity.notFound().build();
 		}
-		return ResponseEntity.ok(user);
+		return ResponseEntity.ok(ownership);
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> erase(@PathVariable Integer id) {
-		boolean t = this.userService.delete(id);
+		boolean t = this.ownershipService.delete(id);
 		
 		if (!t) {
 			return ResponseEntity.notFound().build();

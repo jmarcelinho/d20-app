@@ -5,10 +5,9 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.model.User;
+import com.example.model.Game;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer>{
-	User findByCpf(String cpf);
-	List<User> findAllByName(String name);
+public interface GameRepository extends JpaRepository<Game, Integer>{
+	List<Game> findAllByName(String name);
 }
