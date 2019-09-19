@@ -12,7 +12,6 @@ import javax.persistence.Table;
 public class Ownership {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idOwnership")
 	private Integer Id;
 	
 	@Column(name = "owner")
