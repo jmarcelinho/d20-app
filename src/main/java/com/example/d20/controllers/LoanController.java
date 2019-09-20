@@ -11,29 +11,28 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.d20.model.User;
-import com.example.d20.services.UserService;
+import com.example.d20.model.Loan;
+import com.example.d20.services.LoanService;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/loan")
+public class LoanController {
 	@Autowired
-	private UserService userService;
+	private LoanService loanService;
 	
 	@GetMapping
-	public List<User> getAll() {
-		return this.userService.getAllUsers();
+	public List<Loan> getAll() {
+		return this.loanService.getAllLoans();
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<User> getUserById(@PathVariable Integer id){
-		User user = this.userService.getUserById(id);
+	public ResponseEntity<Loan> getLoanById(@PathVariable Integer id){
+		Loan user = this.loanService.getLoanById(id);
 		
 		if(user == null) {
 			return ResponseEntity.notFound().build();
@@ -43,23 +42,14 @@ public class UserController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<User> add(@Valid @RequestBody User userBody){
-		User user = this.userService.addUser(userBody);
-		return ResponseEntity.ok(user);
-	}
-	
-	@PutMapping("/{id}")
-	public ResponseEntity<User> update(@PathVariable Integer id, @Valid @RequestBody User userBody){
-		User user = this.userService.updateUser(id, userBody);
-		if(user == null) {
-			return ResponseEntity.notFound().build();
-		}
+	public ResponseEntity<Loan> add(@Valid @RequestBody Loan userBody){
+		Loan user = this.loanService.addLoan(userBody);
 		return ResponseEntity.ok(user);
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> erase(@PathVariable Integer id) {
-		boolean t = this.userService.delete(id);
+		boolean t = this.loanService.delete(id);
 		
 		if (!t) {
 			return ResponseEntity.notFound().build();
@@ -67,4 +57,5 @@ public class UserController {
 		
 		return ResponseEntity.noContent().build();
 	}
+
 }

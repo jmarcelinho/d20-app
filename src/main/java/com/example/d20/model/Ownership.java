@@ -6,7 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
+import javax.persistence.ManyToOne;
+ 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 @Table(name = "tb_ownership")
 public class Ownership {
@@ -14,9 +16,11 @@ public class Ownership {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer Id;
 	
+	@ManyToOne()
 	@Column(name = "owner")
 	private User owner;
 	
+	@ManyToOne()
 	@Column(name = "game")
 	private Game game;
 	
