@@ -15,13 +15,14 @@ public class Loan {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer Id;
 	
-	@ManyToOne()
+	@ManyToOne
 	@Column(name = "item")
 	private Ownership item;
 	
 	@Column(name = "price")
 	private double price;
 	
+	public Loan() {}
 	public Loan(Ownership item, double price) {
 		this.item = item;
 		this.price = price;

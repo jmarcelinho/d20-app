@@ -16,11 +16,11 @@ public class Ownership {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer Id;
 	
-	@ManyToOne()
+	@ManyToOne
 	@Column(name = "owner")
 	private User owner;
 	
-	@ManyToOne()
+	@ManyToOne
 	@Column(name = "game")
 	private Game game;
 	
@@ -30,6 +30,7 @@ public class Ownership {
 	@Column(name = "info")
 	private String info;
 	
+	public Ownership() {}
 	public Ownership(User owner, Game game, double price, String info) {
 		this.owner = owner;
 		this.game = game;

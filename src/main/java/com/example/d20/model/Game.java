@@ -24,7 +24,7 @@ public class Game {
 	private String genre;
 	
 	// attribute to picture of the game?
-	
+	public Game() {}
 	public Game(String name, String type, String genre) {
 		this.name = name;
 		this.type = type;
