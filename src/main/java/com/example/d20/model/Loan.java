@@ -16,7 +16,6 @@ public class Loan {
 	private Integer Id;
 	
 	@ManyToOne
-	@Column(name = "item")
 	private Ownership item;
 	
 	@Column(name = "price")

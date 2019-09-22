@@ -17,11 +17,9 @@ public class Ownership {
 	private Integer Id;
 	
 	@ManyToOne
-	@Column(name = "owner")
 	private User owner;
 	
 	@ManyToOne
-	@Column(name = "game")
 	private Game game;
 	
 	@Column(name = "price")
