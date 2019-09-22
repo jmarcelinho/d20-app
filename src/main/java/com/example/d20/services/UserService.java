@@ -30,13 +30,14 @@ public class UserService {
 		User newUser = this.getUserById(id);
 		
 		if(newUser != null) {
+			newUser.setId(id);
 			newUser.setCpf(user.getCpf());
 			newUser.setBankInfo(user.getBankInfo());
 			newUser.setCredCard(user.getCredCard());
 			newUser.setName(user.getName());
 			newUser.setTelephone(user.getTelephone());
 		}
-		
+		this.userRepository.save(newUser);
 		return newUser;
 	}
 	
@@ -51,7 +52,7 @@ public class UserService {
 		return false;
 	}
 	
-	public List<User> getUserByNome(String name){
+	public List<User> getUserByName(String name){
 		return this.userRepository.findAllByName(name);
 	}
 }

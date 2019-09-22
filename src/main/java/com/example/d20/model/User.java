@@ -3,15 +3,18 @@ package com.example.d20.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "tb_user")
 public class User {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(generator = "increment")
+	@GenericGenerator(name = "increment", strategy = "increment")
+	@Column(name = "IdUser")
 	private Integer Id;
 	
 	@Column(name = "name")
@@ -32,6 +35,8 @@ public class User {
 	@Column(name = "email")
 	private String email;
 	
+	public User() {}
+	
 	public User(String name, String bankInfo, String credCard, String cpf, String telephone, String email) {
 		this.name = name;
 		this.bankInfo = bankInfo;
@@ -39,6 +44,15 @@ public class User {
 		this.cpf = cpf;
 		this.telephone = telephone;
 		this.email = email;
+	}
+	
+	
+	public Integer getId() {
+		return this.Id;
+	}
+
+	public void setId(Integer id) {
+		this.Id = id;
 	}
 
 	public String getName() {

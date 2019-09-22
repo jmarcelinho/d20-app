@@ -24,7 +24,7 @@ public class Game {
 	private String genre;
 	
 	// attribute to picture of the game?
-	
+	public Game() {}
 	public Game(String name, String type, String genre) {
 		this.name = name;
 		this.type = type;
@@ -54,7 +54,11 @@ public class Game {
 	public void setGenre(String newGenre) {
 		this.genre = newGenre;
 	}
-
+	
+	public void setId(Integer id) {
+		Id = id;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
