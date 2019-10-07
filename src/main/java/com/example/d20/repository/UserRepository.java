@@ -10,5 +10,5 @@ import com.example.d20.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer>{
 	User findByCpf(String cpf);
-	List<User> findAllByName(String name);
+	List<User> findAllByFname(String name);
 }
