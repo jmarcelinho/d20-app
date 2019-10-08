@@ -13,11 +13,12 @@ public class D20Application {
 	static RoleRepository roleRepository;
 	
 	public static void main(String[] args) {
+		SpringApplication.run(D20Application.class, args);
+		
 		roleRepository.save(new Role(RoleName.ROLE_USER));
 		roleRepository.save(new Role(RoleName.ROLE_ADMIN));
 		roleRepository.save(new Role(RoleName.ROLE_PM));
-		
-		SpringApplication.run(D20Application.class, args);
+		roleRepository.count();
 	}
 
 }
