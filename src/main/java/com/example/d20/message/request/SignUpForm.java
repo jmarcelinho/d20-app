@@ -20,7 +20,6 @@ public class SignUpForm {
     
     private Set<String> role;
     
-    
     @NotBlank
     @Size(min = 6, max = 40)
     private String password;
@@ -37,7 +36,7 @@ public class SignUpForm {
         return lastname;
     }
 
-    public void setLastname(String lastname) {
+    public void setUsername(String lastname) {
         this.lastname = lastname;
     }
 

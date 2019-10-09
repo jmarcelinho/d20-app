@@ -18,7 +18,7 @@ public class UserPrinciple implements UserDetails {
 
     private String name;
 
-    private String lastname;
+    private String username;
 
     private String email;
 
@@ -28,11 +28,11 @@ public class UserPrinciple implements UserDetails {
     private Collection<? extends GrantedAuthority> authorities;
 
     public UserPrinciple(Integer id, String name, 
-			    		String lastname, String email, String password, 
+			    		String username, String email, String password, 
 			    		Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.name = name;
-        this.lastname = lastname;
+        this.username = username;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
@@ -52,12 +52,7 @@ public class UserPrinciple implements UserDetails {
                 authorities
         );
     }
-    
-    @Override
-	public String getUsername() {
-		return email;
-	}
-    
+
     public Integer getId() {
         return id;
     }
@@ -70,8 +65,9 @@ public class UserPrinciple implements UserDetails {
         return email;
     }
 
-    public String getLastname() {
-        return lastname;
+    @Override
+    public String getUsername() {
+        return username;
     }
 
     @Override
@@ -112,5 +108,4 @@ public class UserPrinciple implements UserDetails {
         UserPrinciple user = (UserPrinciple) o;
         return Objects.equals(id, user.id);
     }
-
 }
