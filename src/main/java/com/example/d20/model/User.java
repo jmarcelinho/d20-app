@@ -19,7 +19,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.NaturalId;
 
 @Entity
-@Table(name = "tb_user")
+@Table(name = "tb_user", schema="myapp")
 public class User{
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
