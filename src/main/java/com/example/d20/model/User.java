@@ -1,147 +1,126 @@
 package com.example.d20.model;
 
-import javax.persistence.Column;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-<<<<<<< HEAD
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-=======
->>>>>>> parent of c9ad4bb... update security
 
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NaturalId;
 
 @Entity
-<<<<<<< HEAD
 @Table(name = "tb_user", schema="myapp")
 public class User{
-=======
-@Table(name = "tb_user")
-public class User {
->>>>>>> parent of c9ad4bb... update security
 	@Id
-	@GeneratedValue(generator = "increment")
-	@GenericGenerator(name = "increment", strategy = "increment")
-	@Column(name = "IdUser")
-	private Integer Id;
-	
-	@Column(name = "name")
-	private String name;
-	
-	@Column(name = "bank_info")
-	private String bankInfo;
-	
-	@Column(name = "credCard")
-	private String credCard;
-	
-	@Column(name = "cpf")
-	private String cpf;
-	
-	@Column(name = "telephone")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @NotBlank
+    @Size(min=3, max = 50)
+    private String name;
+
+    @NotBlank
+    @Size(min=3, max = 50)
+    private String lastname;
+
+    @NaturalId
+    @NotBlank
+    @Size(max = 50)
+    @Email
+    private String email;
+
+    @NotBlank
+    @Size(min=6, max = 100)
+    private String password;
+    
+    @Size(min=8, max = 9)
 	private String telephone;
-	
-	@Column(name = "email")
-	private String email;
-	
-	public User() {}
-	
-	public User(String name, String bankInfo, String credCard, String cpf, String telephone, String email) {
-		this.name = name;
-		this.bankInfo = bankInfo;
-		this.credCard = credCard;
-		this.cpf = cpf;
-		this.telephone = telephone;
-		this.email = email;
-	}
-	
-	
-	public Integer getId() {
-		return this.Id;
-	}
+    
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles", 
+    	joinColumns = @JoinColumn(name = "user_id"), 
+    	inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
-	public void setId(Integer id) {
-		this.Id = id;
-	}
+    public User() {}
 
-	public String getName() {
-		return name;
-	}
+    public User(String name, String lastname, String email, String password, String telephone) {
+        this.name = name;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+        this.telephone = telephone;
+    }
+    
+    public User(String name, String lastname, String email, String password) {
+        this.name = name;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+    }
+    
+    public Integer getId() {
+        return id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public String getBankInfo() {
-		return bankInfo;
-	}
+    public String getLastname() {
+        return lastname;
+    }
 
-	public void setBankInfo(String bank_info) {
-		this.bankInfo = bank_info;
-	}
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
 
-	public String getCredCard() {
-		return credCard;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setCredCard(String cred_card) {
-		this.credCard = cred_card;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getCpf() {
-		return cpf;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public String getTelephone() {
-		return telephone;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
+    public String getTelephone() {
+        return password;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+    public Set<Role> getRoles() {
+        return roles;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		if (cpf == null) {
-			if (other.cpf != null)
-				return false;
-		} else if (!cpf.equals(other.cpf))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		return true;
-	}
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 }

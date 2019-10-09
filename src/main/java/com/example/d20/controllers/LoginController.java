@@ -24,21 +24,21 @@ import com.example.d20.message.request.SignUpForm;
 import com.example.d20.message.response.JwtResponse;
 import com.example.d20.model.Role;
 import com.example.d20.model.RoleName;
-import com.example.d20.model.Account;
+import com.example.d20.model.User;
 import com.example.d20.repository.RoleRepository;
-import com.example.d20.repository.AccountRepository;
+import com.example.d20.repository.UserRepository;
 import com.example.d20.security.jwt.JwtProvider;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/auth")
-public class AuthRestAPIs {
+@RequestMapping("/account")
+public class LoginController {
 
     @Autowired
     AuthenticationManager authenticationManager;
 
     @Autowired
-    AccountRepository accountRepository;
+    UserRepository userRepository;
 
     @Autowired
     RoleRepository roleRepository;
@@ -54,7 +54,7 @@ public class AuthRestAPIs {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        loginRequest.getUsername(),
+                        loginRequest.getEmail(),
                         loginRequest.getPassword()
                 )
         );
@@ -67,18 +67,13 @@ public class AuthRestAPIs {
 
     @PostMapping("/signup")
     public ResponseEntity<String> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
-        if(accountRepository.existsByUsername(signUpRequest.getUsername())) {
-            return new ResponseEntity<String>("Fail -> Username is already taken!",
-                    HttpStatus.BAD_REQUEST);
-        }
-
-        if(accountRepository.existsByEmail(signUpRequest.getEmail())) {
+        if(userRepository.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity<String>("Fail -> Email is already in use!",
                     HttpStatus.BAD_REQUEST);
         }
 
         // Creating user's account
-        Account user = new Account(signUpRequest.getName(), signUpRequest.getUsername(),
+        User user = new User(signUpRequest.getName(), signUpRequest.getLastname(),
                 signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()));
 
         Set<String> strRoles = signUpRequest.getRole();
@@ -93,12 +88,6 @@ public class AuthRestAPIs {
 	    			roles.add(adminRole);
 	    			
 	    			break;
-	    		case "pm":
-	            	Role pmRole = roleRepository.findByName(RoleName.ROLE_PM)
-	                .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-	            	roles.add(pmRole);
-	            	
-	    			break;
 	    		default:
 	        		Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
 	                .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
@@ -107,7 +96,7 @@ public class AuthRestAPIs {
         });
         
         user.setRoles(roles);
-        accountRepository.save(user);
+        userRepository.save(user);
 
         return ResponseEntity.ok().body("User registered successfully!");
     }
