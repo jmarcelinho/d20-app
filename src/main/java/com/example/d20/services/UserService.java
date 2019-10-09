@@ -31,9 +31,6 @@ public class UserService {
 		
 		if(newUser != null) {
 			newUser.setId(id);
-			newUser.setCpf(user.getCpf());
-			newUser.setBankInfo(user.getBankInfo());
-			newUser.setCredCard(user.getCredCard());
 			newUser.setName(user.getName());
 			newUser.setTelephone(user.getTelephone());
 		}

@@ -1,7 +1,8 @@
 package com.example.d20.security.services;
 
-import com.example.d20.model.Account;
-import com.example.d20.repository.AccountRepository;
+import com.example.d20.model.User;
+import com.example.d20.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,16 +14,16 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    AccountRepository accountRepository;
+    UserRepository userRepository;
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String username)
+    public UserDetails loadUserByUsername(String email)
             throws UsernameNotFoundException {
     	
-        Account user = accountRepository.findByUsername(username)
+        User user = userRepository.findByEmail(email)
                 	.orElseThrow(() -> 
-                        new UsernameNotFoundException("User Not Found with -> username or email : " + username)
+                        new UsernameNotFoundException("User Not Found with -> email : " + email)
         );
 
         return UserPrinciple.build(user);

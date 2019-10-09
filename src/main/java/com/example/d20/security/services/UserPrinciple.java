@@ -1,6 +1,6 @@
 package com.example.d20.security.services;
 
-import com.example.d20.model.Account;
+import com.example.d20.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class UserPrinciple implements UserDetails {
 	private static final long serialVersionUID = 1L;
 
-	private Long id;
+	private Integer id;
 
     private String name;
 
@@ -27,7 +27,7 @@ public class UserPrinciple implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrinciple(Long id, String name, 
+    public UserPrinciple(Integer id, String name, 
 			    		String username, String email, String password, 
 			    		Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
@@ -38,7 +38,7 @@ public class UserPrinciple implements UserDetails {
         this.authorities = authorities;
     }
 
-    public static UserPrinciple build(Account user) {
+    public static UserPrinciple build(User user) {
         List<GrantedAuthority> authorities = user.getRoles().stream().map(role ->
                 new SimpleGrantedAuthority(role.getName().name())
         ).collect(Collectors.toList());
@@ -46,14 +46,14 @@ public class UserPrinciple implements UserDetails {
         return new UserPrinciple(
                 user.getId(),
                 user.getName(),
-                user.getUsername(),
+                user.getLastname(),
                 user.getEmail(),
                 user.getPassword(),
                 authorities
         );
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
