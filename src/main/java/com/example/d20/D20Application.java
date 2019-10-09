@@ -30,7 +30,7 @@ public class D20Application implements CommandLineRunner {
 	@Override
 	public void run(String... params) throws Exception {
 		//roleRepository.save(new Role(RoleName.ROLE_USER));
-		roleRepository.save(new Role(RoleName.ROLE_ADMIN));
+		//roleRepository.save(new Role(RoleName.ROLE_ADMIN));
 		
 		SignUpForm adm = new SignUpForm(); 
 		adm.setName("ADM");
