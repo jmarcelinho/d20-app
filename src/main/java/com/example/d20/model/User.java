@@ -20,7 +20,11 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.NaturalId;
 
 @Entity
-@Table(name = "tb_user")
+@Table(name = "tb_user", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {
+            "email"
+        })
+})
 public class User{
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
