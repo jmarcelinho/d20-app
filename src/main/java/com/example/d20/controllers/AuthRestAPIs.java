@@ -24,21 +24,21 @@ import com.example.d20.message.request.SignUpForm;
 import com.example.d20.message.response.JwtResponse;
 import com.example.d20.model.Role;
 import com.example.d20.model.RoleName;
-import com.example.d20.model.User;
+import com.example.d20.model.Account;
 import com.example.d20.repository.RoleRepository;
-import com.example.d20.repository.UserRepository;
+import com.example.d20.repository.AccountRepository;
 import com.example.d20.security.jwt.JwtProvider;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/account")
-public class LoginController {
+@RequestMapping("/api/auth")
+public class AuthRestAPIs {
 
     @Autowired
     AuthenticationManager authenticationManager;
 
     @Autowired
-    UserRepository userRepository;
+    AccountRepository accountRepository;
 
     @Autowired
     RoleRepository roleRepository;
@@ -54,7 +54,7 @@ public class LoginController {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        loginRequest.getEmail(),
+                        loginRequest.getUsername(),
                         loginRequest.getPassword()
                 )
         );
@@ -67,13 +67,18 @@ public class LoginController {
 
     @PostMapping("/signup")
     public ResponseEntity<String> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
-        if(userRepository.existsByEmail(signUpRequest.getEmail())) {
+        if(accountRepository.existsByUsername(signUpRequest.getUsername())) {
+            return new ResponseEntity<String>("Fail -> Username is already taken!",
+                    HttpStatus.BAD_REQUEST);
+        }
+
+        if(accountRepository.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity<String>("Fail -> Email is already in use!",
                     HttpStatus.BAD_REQUEST);
         }
 
         // Creating user's account
-        User user = new User(signUpRequest.getName(), signUpRequest.getLastname(),
+        Account user = new Account(signUpRequest.getName(), signUpRequest.getUsername(),
                 signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()));
 
         Set<String> strRoles = signUpRequest.getRole();
@@ -88,6 +93,12 @@ public class LoginController {
 	    			roles.add(adminRole);
 	    			
 	    			break;
+	    		case "pm":
+	            	Role pmRole = roleRepository.findByName(RoleName.ROLE_PM)
+	                .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
+	            	roles.add(pmRole);
+	            	
+	    			break;
 	    		default:
 	        		Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
 	                .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
@@ -96,7 +107,7 @@ public class LoginController {
         });
         
         user.setRoles(roles);
-        userRepository.save(user);
+        accountRepository.save(user);
 
         return ResponseEntity.ok().body("User registered successfully!");
     }

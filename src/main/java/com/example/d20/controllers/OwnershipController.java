@@ -6,7 +6,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,13 +27,11 @@ public class OwnershipController {
 	private OwnershipService ownershipService;
 	
 	@GetMapping
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public List<Ownership> getAll() {
 		return this.ownershipService.getAllOwnerships();
 	}
 	
 	@GetMapping("/{id}")
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<Ownership> getOwnershipById(@PathVariable Integer id){
 		Ownership ownership = this.ownershipService.getOwnershipById(id);
 		
@@ -46,14 +43,12 @@ public class OwnershipController {
 	}
 	
 	@PostMapping
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<Ownership> add(@Valid @RequestBody Ownership ownershipBody){
 		Ownership ownership = this.ownershipService.addOwnership(ownershipBody);
 		return ResponseEntity.ok(ownership);
 	}
 	
 	@PutMapping("/{id}")
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<Ownership> update(@PathVariable Integer id, @Valid @RequestBody Ownership ownershipBody){
 		Ownership ownership = this.ownershipService.updateOwnership(id, ownershipBody);
 		if(ownership == null) {
@@ -63,7 +58,6 @@ public class OwnershipController {
 	}
 	
 	@DeleteMapping("/{id}")
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<Void> erase(@PathVariable Integer id) {
 		boolean t = this.ownershipService.delete(id);
 		

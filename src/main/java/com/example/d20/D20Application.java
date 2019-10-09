@@ -20,9 +20,12 @@ public class D20Application implements CommandLineRunner {
 	@Autowired
 	RoleRepository roleRepository;
 	
+<<<<<<< HEAD
 	@Autowired
 	LoginController loginController;
 	
+=======
+>>>>>>> parent of c9ad4bb... update security
 	public static void main(String[] args) {
 		SpringApplication.run(D20Application.class, args);
 	}
@@ -31,6 +34,7 @@ public class D20Application implements CommandLineRunner {
 	public void run(String... params) throws Exception {
 		roleRepository.save(new Role(RoleName.ROLE_USER));
 		roleRepository.save(new Role(RoleName.ROLE_ADMIN));
+<<<<<<< HEAD
 		
 		SignUpForm adm = new SignUpForm(); 
 		adm.setName("ADM");
@@ -48,6 +52,9 @@ public class D20Application implements CommandLineRunner {
 		user.setEmail("user@user.com");
 		user.setPassword("user");
 		loginController.registerUser(user);
+=======
+		roleRepository.save(new Role(RoleName.ROLE_PM));
+>>>>>>> parent of c9ad4bb... update security
 	}
 
 
