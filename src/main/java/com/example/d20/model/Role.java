@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.NaturalId;
 
 @Entity
-@Table(name = "roles", schema="d20app")
+@Table(name = "roles", schema="d20-app")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
