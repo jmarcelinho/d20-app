@@ -6,7 +6,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,13 +27,11 @@ public class UserController {
 	private UserService userService;
 	
 	@GetMapping
-	@PreAuthorize("hasRole('ADMIN')")
 	public List<User> getAll() {
 		return this.userService.getAllUsers();
 	}
 	
 	@GetMapping("/{id}")
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<User> getUserById(@PathVariable Integer id){
 		User user = this.userService.getUserById(id);
 		
@@ -46,14 +43,12 @@ public class UserController {
 	}
 	
 	@PostMapping
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<User> add(@Valid @RequestBody User userBody){
 		User user = this.userService.addUser(userBody);
 		return ResponseEntity.ok(user);
 	}
 	
 	@PutMapping("/{id}")
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<User> update(@PathVariable Integer id, @Valid @RequestBody User userBody){
 		User user = this.userService.updateUser(id, userBody);
 		if(user == null) {
@@ -63,7 +58,6 @@ public class UserController {
 	}
 	
 	@DeleteMapping("/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Void> erase(@PathVariable Integer id) {
 		boolean t = this.userService.delete(id);
 		

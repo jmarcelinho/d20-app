@@ -6,7 +6,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,13 +26,11 @@ public class LoanController {
 	private LoanService loanService;
 	
 	@GetMapping
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public List<Loan> getAll() {
 		return this.loanService.getAllLoans();
 	}
 	
 	@GetMapping("/{id}")
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<Loan> getLoanById(@PathVariable Integer id){
 		Loan user = this.loanService.getLoanById(id);
 		
@@ -45,14 +42,12 @@ public class LoanController {
 	}
 	
 	@PostMapping
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<Loan> add(@Valid @RequestBody Loan userBody){
 		Loan user = this.loanService.addLoan(userBody);
 		return ResponseEntity.ok(user);
 	}
 	
 	@DeleteMapping("/{id}")
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<Void> erase(@PathVariable Integer id) {
 		boolean t = this.loanService.delete(id);
 		
