@@ -31,8 +31,8 @@ import com.example.d20.security.jwt.JwtProvider;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/auth")
-public class AuthRestAPIs {
+@RequestMapping("/account")
+public class LoginController {
 
     @Autowired
     AuthenticationManager authenticationManager;
@@ -92,12 +92,6 @@ public class AuthRestAPIs {
 	                .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
 	    			roles.add(adminRole);
 	    			
-	    			break;
-	    		case "pm":
-	            	Role pmRole = roleRepository.findByName(RoleName.ROLE_PM)
-	                .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-	            	roles.add(pmRole);
-	            	
 	    			break;
 	    		default:
 	        		Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
