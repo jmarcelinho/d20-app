@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import javax.persistence.ManyToOne;
 
 @Entity
-@Table(name = "tb_ownership")
+@Table(name = "tb_ownership", schema="d20app")
 public class Ownership {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
