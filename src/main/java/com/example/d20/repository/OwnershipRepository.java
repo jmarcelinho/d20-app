@@ -11,5 +11,6 @@ import com.example.d20.model.User;
 @Repository
 public interface OwnershipRepository extends JpaRepository<Ownership, Integer>{
 	List<Ownership> findAllByOwner(User user);
+	List<Ownership> findAllByAvailability(boolean availability);
 }
 

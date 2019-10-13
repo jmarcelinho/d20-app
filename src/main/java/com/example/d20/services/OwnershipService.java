@@ -52,4 +52,8 @@ public class OwnershipService {
 	public List<Ownership> getOwnershipByOwner(User owner) {
 		return this.ownershipRepository.findAllByOwner(owner);
 	}
+	
+	public List<Ownership> getOwnershipByAvailability(boolean availability) {
+		return this.ownershipRepository.findAllByAvailability(availability);
+	}
 }

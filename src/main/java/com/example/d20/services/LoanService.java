@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.d20.model.Loan;
 import com.example.d20.model.Ownership;
+import com.example.d20.model.User;
 import com.example.d20.repository.LoanRepository;
 
 @Service
@@ -39,5 +40,9 @@ public class LoanService {
 	
 	public List<Loan> getLoanByItem(Ownership item) {
 		return this.loanRepository.findAllByItem(item);
+	}
+	
+	public List<Loan> getLoanByLoanee(User loanee) {
+		return this.loanRepository.findAllByLoanee(loanee);
 	}
 }

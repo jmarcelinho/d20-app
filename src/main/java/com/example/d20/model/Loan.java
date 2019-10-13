@@ -18,22 +18,31 @@ public class Loan {
 	@ManyToOne
 	private Ownership item;
 	
+	@ManyToOne
+	private User loanee;
+	
 	@Column(name = "price")
 	private double price;
 	
 	public Loan() {}
-	public Loan(Ownership item, double price) {
+	public Loan(Ownership item, User loanee, double price) {
 		this.item = item;
 		this.price = price;
+		this.loanee = loanee;
 	}
 	
-	public Loan(Ownership item) {
+	public Loan(Ownership item, User loanee) {
 		this.item = item;
+		this.loanee = loanee;
 		this.price = item.getPrice();
 	}
 	
 	public Ownership getItem() {
-		return item;
+		return this.item;
+	}
+	
+	public User getLoanee() {
+		return this.loanee;
 	}
 
 	public void setItem(Ownership item) {
@@ -41,7 +50,7 @@ public class Loan {
 	}
 
 	public double getPrice() {
-		return price;
+		return this.price;
 	}
 
 	public void setPrice(double price) {
