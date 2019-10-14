@@ -28,12 +28,16 @@ public class Ownership {
 	@Column(name = "info")
 	private String info;
 	
+	@Column(name = "availability")
+	private boolean availability;
+	
 	public Ownership() {}
-	public Ownership(User owner, Game game, double price, String info) {
+	public Ownership(User owner, Game game, double price, String info, boolean availability) {
 		this.owner = owner;
 		this.game = game;
 		this.price = price;
 		this.info = info;
+		this.availability = availability;
 	}
 	
 	public User getOwner() {
@@ -46,6 +50,10 @@ public class Ownership {
 	
 	public double getPrice() {
 		return this.price;
+	}
+	
+	public boolean getAvailability() {
+		return this.availability;
 	}
 	
 	public void setPrice(double newPrice) {
