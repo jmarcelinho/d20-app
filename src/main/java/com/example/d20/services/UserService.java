@@ -34,7 +34,8 @@ public class UserService {
 			newUser.setCpf(user.getCpf());
 			newUser.setBankInfo(user.getBankInfo());
 			newUser.setCredCard(user.getCredCard());
-			newUser.setName(user.getName());
+			newUser.setFname(user.getFname());
+			newUser.setLname(user.getLname());
 			newUser.setTelephone(user.getTelephone());
 		}
 		this.userRepository.save(newUser);

@@ -24,8 +24,10 @@ import com.example.d20.message.request.SignUpForm;
 import com.example.d20.message.response.JwtResponse;
 import com.example.d20.model.Role;
 import com.example.d20.model.RoleName;
+import com.example.d20.model.User;
 import com.example.d20.model.Account;
 import com.example.d20.repository.RoleRepository;
+import com.example.d20.repository.UserRepository;
 import com.example.d20.repository.AccountRepository;
 import com.example.d20.security.jwt.JwtProvider;
 
@@ -39,7 +41,10 @@ public class LoginController {
 
     @Autowired
     AccountRepository accountRepository;
-
+    
+    @Autowired
+    UserRepository userRepository;
+    
     @Autowired
     RoleRepository roleRepository;
 
@@ -67,20 +72,17 @@ public class LoginController {
 
     @PostMapping("/signup")
     public ResponseEntity<String> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
-        if(accountRepository.existsByUsername(signUpRequest.getUsername())) {
-            return new ResponseEntity<String>("Fail -> Username is already taken!",
-                    HttpStatus.BAD_REQUEST);
-        }
-
         if(accountRepository.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity<String>("Fail -> Email is already in use!",
                     HttpStatus.BAD_REQUEST);
         }
 
         // Creating user's account
-        Account user = new Account(signUpRequest.getName(), signUpRequest.getUsername(),
-                signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()));
-
+        Account acc = new Account(signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()));
+        
+        User user = new User(signUpRequest.getFname(), signUpRequest.getLname(),
+                signUpRequest.getTelephone(), signUpRequest.getEmail());
+        
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
 
@@ -100,9 +102,9 @@ public class LoginController {
         	}
         });
         
-        user.setRoles(roles);
-        accountRepository.save(user);
-
+        acc.setRoles(roles);
+        accountRepository.save(acc);
+        userRepository.save(user);
         return ResponseEntity.ok().body("User registered successfully!");
     }
 }

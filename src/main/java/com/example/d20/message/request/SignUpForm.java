@@ -7,16 +7,19 @@ import javax.validation.constraints.*;
 public class SignUpForm {
     @NotBlank
     @Size(min = 3, max = 50)
-    private String name;
-
+    private String fname;
+    
     @NotBlank
     @Size(min = 3, max = 50)
-    private String username;
+    private String lname;
 
     @NotBlank
     @Size(max = 60)
     @Email
     private String email;
+    
+    @Size(min=8, max = 9)
+    private String telephone;
     
     private Set<String> role;
     
@@ -24,20 +27,20 @@ public class SignUpForm {
     @Size(min = 6, max = 40)
     private String password;
 
-    public String getName() {
-        return name;
+    public String getFname() {
+        return fname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFname(String fname) {
+        this.fname = fname;
+    }
+    
+    public String getLname() {
+        return fname;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
+    public void setLname(String lname) {
+        this.lname = lname;
     }
 
     public String getEmail() {
@@ -47,7 +50,15 @@ public class SignUpForm {
     public void setEmail(String email) {
         this.email = email;
     }
+    
+    public String getTelephone() {
+        return telephone;
+    }
 
+    public void setTelephone(String tel) {
+        this.telephone = telephone;
+    }
+    
     public String getPassword() {
         return password;
     }

@@ -33,14 +33,6 @@ public class Account{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    @Size(min=3, max = 50)
-    private String name;
-
-    @NotBlank
-    @Size(min=3, max = 50)
-    private String username;
-
     @NaturalId
     @NotBlank
     @Size(max = 50)
@@ -59,9 +51,7 @@ public class Account{
 
     public Account() {}
 
-    public Account(String name, String username, String email, String password) {
-        this.name = name;
-        this.username = username;
+    public Account(String email, String password) {
         this.email = email;
         this.password = password;
     }
@@ -73,23 +63,7 @@ public class Account{
     public void setId(Long id) {
         this.id = id;
     }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
+ 
     public String getEmail() {
         return email;
     }
