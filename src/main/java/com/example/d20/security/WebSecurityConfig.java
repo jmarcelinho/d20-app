@@ -26,7 +26,7 @@ import com.example.d20.security.services.UserDetailsServiceImpl;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsServiceImpl userDetailsService;
-
+    
     @Autowired
     private JwtAuthEntryPoint unauthorizedHandler;
 
@@ -65,4 +65,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
+
 }
