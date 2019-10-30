@@ -20,11 +20,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.NaturalId;
 
 @Entity
-@Table(name = "account", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {
-            "email"
-        })
-})
+@Table(name = "tb_account")
 public class Account{
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +33,7 @@ public class Account{
     private String email;
 
     @NotBlank
-    @Size(min=6, max = 100)
+    @Size(min=4, max = 100)
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)

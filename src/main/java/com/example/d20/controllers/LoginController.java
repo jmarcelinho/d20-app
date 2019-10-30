@@ -96,7 +96,6 @@ public class LoginController {
         strRoles.forEach(role -> {
         	switch(role) {
 	    		case "admin":
-	    			System.out.println("HERE: :" + roleRepository.count());
 	    			Role adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
 	                .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
 	    			roles.add(adminRole);
