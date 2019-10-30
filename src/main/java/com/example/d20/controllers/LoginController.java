@@ -72,6 +72,13 @@ public class LoginController {
 
     @PostMapping("/signup")
     public ResponseEntity<String> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
+    	
+    	System.out.println(signUpRequest.getFname());
+    	System.out.println(signUpRequest.getLname());
+    	System.out.println(signUpRequest.getEmail());
+    	System.out.println(signUpRequest.getTelephone());
+    	System.out.println(signUpRequest.getPassword());
+    	
         if(accountRepository.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity<String>("Fail -> Email is already in use!",
                     HttpStatus.BAD_REQUEST);
