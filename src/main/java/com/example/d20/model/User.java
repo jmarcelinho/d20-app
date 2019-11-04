@@ -23,12 +23,6 @@ public class User {
 	@Column(name = "lname")
 	private String lname;
 	
-	@Column(name = "bank_info")
-	private String bankInfo;
-	
-	@Column(name = "credCard")
-	private String credCard;
-	
 	@Column(name = "cpf")
 	private String cpf;
 	
@@ -40,11 +34,9 @@ public class User {
 	
 	public User() {}
 	
-	public User(String fname, String lname, String bankInfo, String credCard, String cpf, String telephone, String email) {
+	public User(String fname, String lname, String cpf, String telephone, String email) {
 		this.fname = fname;
 		this.lname = lname;
-		this.bankInfo = bankInfo;
-		this.credCard = credCard;
 		this.cpf = cpf;
 		this.telephone = telephone;
 		this.email = email;
@@ -79,22 +71,6 @@ public class User {
 
 	public void setLname(String name) {
 		this.lname = name;
-	}
-	
-	public String getBankInfo() {
-		return bankInfo;
-	}
-
-	public void setBankInfo(String bank_info) {
-		this.bankInfo = bank_info;
-	}
-
-	public String getCredCard() {
-		return credCard;
-	}
-
-	public void setCredCard(String cred_card) {
-		this.credCard = cred_card;
 	}
 
 	public String getCpf() {
