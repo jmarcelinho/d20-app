@@ -32,9 +32,8 @@ public class UserService {
 		if(newUser != null) {
 			newUser.setId(id);
 			newUser.setCpf(user.getCpf());
-			newUser.setBankInfo(user.getBankInfo());
-			newUser.setCredCard(user.getCredCard());
-			newUser.setName(user.getName());
+			newUser.setFname(user.getFname());
+			newUser.setLname(user.getLname());
 			newUser.setTelephone(user.getTelephone());
 		}
 		this.userRepository.save(newUser);
@@ -53,6 +52,6 @@ public class UserService {
 	}
 	
 	public List<User> getUserByName(String name){
-		return this.userRepository.findAllByName(name);
+		return this.userRepository.findAllByFname(name);
 	}
 }

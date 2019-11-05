@@ -17,14 +17,11 @@ public class User {
 	@Column(name = "IdUser")
 	private Integer Id;
 	
-	@Column(name = "name")
-	private String name;
+	@Column(name = "fname")
+	private String fname;
 	
-	@Column(name = "bank_info")
-	private String bankInfo;
-	
-	@Column(name = "credCard")
-	private String credCard;
+	@Column(name = "lname")
+	private String lname;
 	
 	@Column(name = "cpf")
 	private String cpf;
@@ -37,15 +34,20 @@ public class User {
 	
 	public User() {}
 	
-	public User(String name, String bankInfo, String credCard, String cpf, String telephone, String email) {
-		this.name = name;
-		this.bankInfo = bankInfo;
-		this.credCard = credCard;
+	public User(String fname, String lname, String cpf, String telephone, String email) {
+		this.fname = fname;
+		this.lname = lname;
 		this.cpf = cpf;
 		this.telephone = telephone;
 		this.email = email;
 	}
 	
+	public User(String fname, String lname, String telephone, String email) {
+		this.fname = fname;
+		this.lname = lname;
+		this.telephone = telephone;
+		this.email = email;
+	}
 	
 	public Integer getId() {
 		return this.Id;
@@ -55,28 +57,20 @@ public class User {
 		this.Id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getFname() {
+		return this.fname;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFname(String name) {
+		this.fname = name;
+	}
+	
+	public String getLname() {
+		return this.lname;
 	}
 
-	public String getBankInfo() {
-		return bankInfo;
-	}
-
-	public void setBankInfo(String bank_info) {
-		this.bankInfo = bank_info;
-	}
-
-	public String getCredCard() {
-		return credCard;
-	}
-
-	public void setCredCard(String cred_card) {
-		this.credCard = cred_card;
+	public void setLname(String name) {
+		this.lname = name;
 	}
 
 	public String getCpf() {
@@ -108,7 +102,7 @@ public class User {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((fname == null) ? 0 : fname.hashCode());
 		return result;
 	}
 
@@ -126,10 +120,15 @@ public class User {
 				return false;
 		} else if (!cpf.equals(other.cpf))
 			return false;
-		if (name == null) {
-			if (other.name != null)
+		if (fname == null) {
+			if (other.fname != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!fname.equals(other.fname))
+			return false;
+		if (lname == null) {
+			if (other.lname != null)
+				return false;
+		} else if (!lname.equals(other.lname))
 			return false;
 		return true;
 	}

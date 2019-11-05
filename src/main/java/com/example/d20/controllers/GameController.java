@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,11 +28,13 @@ public class GameController {
 	private GameService gameService;
 	
 	@GetMapping
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public List<Game> getAll() {
 		return this.gameService.getAllGames();
 	}
 	
 	@GetMapping("/{id}")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<Game> getGameById(@PathVariable Integer id){
 		Game game = this.gameService.getGameById(id);
 		
@@ -43,12 +46,14 @@ public class GameController {
 	}
 	
 	@PostMapping
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<Game> add(@Valid @RequestBody Game gameBody){
 		Game game = this.gameService.addGame(gameBody);
 		return ResponseEntity.ok(game);
 	}
 	
 	@PutMapping("/{id}")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<Game> update(@PathVariable Integer id, @Valid @RequestBody Game gameBody){
 		Game game = this.gameService.updateGame(id, gameBody);
 		if(game == null) {
@@ -58,6 +63,7 @@ public class GameController {
 	}
 	
 	@DeleteMapping("/{id}")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<Void> erase(@PathVariable Integer id) {
 		boolean t = this.gameService.delete(id);
 		
