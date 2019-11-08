@@ -33,6 +33,25 @@ public class GameController {
 		return this.gameService.getAllGames();
 	}
 	
+	@GetMapping("/name/{name}")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	public List<Game> getGameByName(@PathVariable String name){
+		return this.gameService.getGameByName(name);
+	}
+	
+	@GetMapping("/type/{type}")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	public List<Game> getGameByType(@PathVariable String type){
+		return this.gameService.getGameByName(type);
+	}
+	
+	@GetMapping("/genre/{genre}")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	public List<Game> getGameByGenre(@PathVariable String genre){
+		return this.gameService.getGameByName(genre);
+	}
+	
+	
 	@GetMapping("/{id}")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<Game> getGameById(@PathVariable Integer id){
