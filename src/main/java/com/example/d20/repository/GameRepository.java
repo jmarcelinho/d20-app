@@ -10,4 +10,6 @@ import com.example.d20.model.Game;
 @Repository
 public interface GameRepository extends JpaRepository<Game, Integer>{
 	List<Game> findAllByName(String name);
+	List<Game> findAllByType(String type);
+	List<Game> findAllByGenre(String genre);
 }
