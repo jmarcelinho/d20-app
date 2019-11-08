@@ -51,8 +51,12 @@ public class UserService {
 		return false;
 	}
 	
-	public List<User> getUserByName(String name){
+	public List<User> getUserByFname(String name){
 		return this.userRepository.findAllByFname(name);
+	}
+	
+	public List<User> getUserByLname(String name){
+		return this.userRepository.findAllByLname(name);
 	}
 	
 	public User getUserByEmail(String name){

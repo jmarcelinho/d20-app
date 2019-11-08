@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.ManyToOne;
  
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "tb_ownership")

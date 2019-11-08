@@ -46,6 +46,15 @@ public class UserController {
 		return ResponseEntity.ok(user);
 	}
 	
+	@GetMapping("/name/{name}")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	public List<User> getUserByName(@PathVariable String name) {
+        List<User> fuser = userService.getUserByFname(name);
+        List<User> luser = userService.getUserByLname(name);
+        fuser.addAll(luser);
+        return fuser;
+    }
+	
 	@PostMapping
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<User> add(@Valid @RequestBody User userBody){
@@ -77,8 +86,9 @@ public class UserController {
 	
 	@GetMapping("/info")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public User getName(Authentication authentication) {
+	public User getInfo(Authentication authentication) {
         User user = userService.getUserByEmail(authentication.getName());
         return user;
     }
+	
 }

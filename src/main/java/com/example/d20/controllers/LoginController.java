@@ -8,14 +8,12 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,9 +27,9 @@ import com.example.d20.model.RoleName;
 import com.example.d20.model.User;
 import com.example.d20.model.Account;
 import com.example.d20.repository.RoleRepository;
-import com.example.d20.repository.UserRepository;
-import com.example.d20.repository.AccountRepository;
 import com.example.d20.security.jwt.JwtProvider;
+import com.example.d20.services.AccountService;
+import com.example.d20.services.UserService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -42,10 +40,10 @@ public class LoginController {
     AuthenticationManager authenticationManager;
 
     @Autowired
-    AccountRepository accountRepository;
+    AccountService accountService;
     
     @Autowired
-    UserRepository userRepository;
+    UserService userService;
     
     @Autowired
     RoleRepository roleRepository;
@@ -81,7 +79,7 @@ public class LoginController {
     	System.out.println(signUpRequest.getTelephone());
     	System.out.println(signUpRequest.getPassword());
     	
-        if(accountRepository.existsByEmail(signUpRequest.getEmail())) {
+        if(accountService.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity<String>("Fail -> Email is already in use!",
                     HttpStatus.BAD_REQUEST);
         }
@@ -111,8 +109,8 @@ public class LoginController {
         });
         
         acc.setRoles(roles);
-        accountRepository.save(acc);
-        userRepository.save(user);
+        accountService.addAccount(acc);
+        userService.addUser(user);
         return ResponseEntity.ok().body("User registered successfully!");
     }
 }
