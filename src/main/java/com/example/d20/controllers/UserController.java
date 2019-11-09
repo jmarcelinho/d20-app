@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.d20.message.request.EditForm;
 import com.example.d20.model.User;
+import com.example.d20.services.AccountService;
 import com.example.d20.services.UserService;
 
 @RestController
@@ -27,6 +30,9 @@ import com.example.d20.services.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private AccountService accountService;
 	
 	@GetMapping
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
@@ -91,4 +97,46 @@ public class UserController {
         return user;
     }
 	
+	
+	@PostMapping("/edit/name")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	public ResponseEntity<String> setFname(Authentication authentication,@Valid @RequestBody EditForm form) {
+        if(accountService.verifyByAuth(authentication, form.getPassword())) {
+        	if(userService.setUserName(authentication, form.getItem())) {
+        		return new ResponseEntity<>("name successfully modified", HttpStatus.ACCEPTED);
+        	}else {
+        		return new ResponseEntity<>("name not modified", HttpStatus.PRECONDITION_FAILED);
+        	}
+        }
+        
+        return new ResponseEntity<>("Name not modified", HttpStatus.PRECONDITION_FAILED);
+    }
+	
+	@PostMapping("/edit/telephone")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	public ResponseEntity<String> setTelephone(Authentication authentication,@Valid @RequestBody EditForm form) {
+        if(accountService.verifyByAuth(authentication, form.getPassword())) {
+        	if(userService.setUserTel(authentication, form.getItem())) {
+        		return new ResponseEntity<>("Telephone successfully modified", HttpStatus.ACCEPTED);
+        	}else {
+        		return new ResponseEntity<>("Telephone not modified", HttpStatus.PRECONDITION_FAILED);
+        	}
+        }
+        
+        return new ResponseEntity<>("Telephone not modified", HttpStatus.PRECONDITION_FAILED);
+    }
+	
+	@PostMapping("/edit/password")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	public ResponseEntity<String> setPassword(Authentication authentication,@Valid @RequestBody EditForm form) {
+        if(accountService.verifyByAuth(authentication, form.getPassword())) {
+        	if(accountService.setAccPassword(authentication, form.getItem())) {
+        		return new ResponseEntity<>("Password successfully modified", HttpStatus.ACCEPTED);
+        	}else {
+        		return new ResponseEntity<>("Password not modified", HttpStatus.PRECONDITION_FAILED);
+        	}
+        }
+        
+        return new ResponseEntity<>("Password not modified", HttpStatus.PRECONDITION_FAILED);
+    }
 }
