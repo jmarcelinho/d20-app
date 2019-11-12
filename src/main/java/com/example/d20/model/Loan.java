@@ -1,5 +1,8 @@
 package com.example.d20.model;
 
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,21 +27,52 @@ public class Loan {
 	@Column(name = "price")
 	private double price;
 	
+	// we'll need the date to know for how long the
+	// game was kept by the user
+	@Column(name = "startDate")
+	private Date startDate;
+	
+	@Column(name = "finishDate")
+	private Date finishDate;
+	
+	@Column(name = "finished")
+	private boolean finished;
+	
 	public Loan() {}
-	public Loan(Ownership item, User loanee, double price) {
+	public Loan(Ownership item, User loanee, double price) {	
+		// TODO: if loan.item.availability is false, throw an error
 		this.item = item;
+		
 		this.price = price;
 		this.loanee = loanee;
+		this.finished = false;
+		this.startDate = new Date();
 	}
 	
 	public Loan(Ownership item, User loanee) {
+		// TODO: if loan.item.availability is false, throw an error		
 		this.item = item;
+		
 		this.loanee = loanee;
+		this.finished = false;
+		this.startDate = new Date();
 		this.price = item.getPrice();
 	}
 	
 	public Ownership getItem() {
 		return this.item;
+	}
+	
+	public Date getStartDate() {
+		return this.startDate;
+	}
+	
+	public Date getFinishDate() {
+		if(this.finished) return this.finishDate;
+		else {
+			// TODO: handle this error in a better way
+			return this.startDate;
+		}
 	}
 	
 	public User getLoanee() {
@@ -55,6 +89,32 @@ public class Loan {
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+	
+	public boolean isFinished() {
+		return this.finished;
+	}
+	
+	public void finishLoan() {
+		this.finished = true;
+		this.finishDate = new Date();
+	}
+	
+	// returns how much needs to be paid for the game
+	// by the end of the loan.
+	public double getTotal() {
+		if(this.finished) {
+			long diffInMs = Math.abs(finishDate.getTime() - startDate.getTime());
+			
+			long diffInDays = TimeUnit.DAYS.convert(diffInMs, TimeUnit.MILLISECONDS);
+			diffInDays += 1;
+			
+			return ((double) diffInDays) * this.price;
+		}
+		
+		// loan is yet to be finished. 
+		// TODO: handle this error in a better way
+		return -1.0;
 	}
 
 	@Override
