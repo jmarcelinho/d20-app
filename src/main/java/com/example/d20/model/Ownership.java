@@ -56,6 +56,10 @@ public class Ownership {
 		return this.availability;
 	}
 	
+	public void setAvailability(boolean newAvailability) {
+		this.availability = newAvailability;
+	}
+	
 	public void setPrice(double newPrice) {
 		this.price = newPrice;
 	}
