@@ -63,7 +63,7 @@ public class LoginController {
                         loginRequest.getPassword()
                 )
         );
-
+        
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String jwt = jwtProvider.generateJwtToken(authentication);
@@ -72,12 +72,6 @@ public class LoginController {
 
     @PostMapping("/signup")
     public ResponseEntity<String> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
-    	
-    	System.out.println(signUpRequest.getFname());
-    	System.out.println(signUpRequest.getLname());
-    	System.out.println(signUpRequest.getEmail());
-    	System.out.println(signUpRequest.getTelephone());
-    	System.out.println(signUpRequest.getPassword());
     	
         if(accountService.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity<String>("Fail -> Email is already in use!",
