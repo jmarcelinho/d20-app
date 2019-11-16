@@ -3,6 +3,7 @@ package com.example.d20.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import com.example.d20.model.User;
@@ -40,11 +41,28 @@ public class UserService {
 		return newUser;
 	}
 	
+	public boolean updateUser(String email, User user) {
+		if( this.delete(email) == false) return false;
+		this.userRepository.save(user);
+		return true;
+	}
+	
 	public boolean delete(Integer id) {
 		User newUser = this.getUserById(id);
 		
 		if(newUser != null) {
 			this.userRepository.deleteById(id);
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean delete(String email) {
+		User user = this.getUserByEmail(email);
+		
+		if(user != null) {
+			this.userRepository.deleteById(user.getId());
 			return true;
 		}
 		
@@ -61,5 +79,22 @@ public class UserService {
 	
 	public User getUserByEmail(String name){
 		return this.userRepository.findByEmail(name);
+	}
+	
+	public boolean setUserName(Authentication authentication, String name) {
+		User user = getUserByEmail(authentication.getName());
+		if(user == null) return false;
+		user.setFname(name);
+		this.updateUser(authentication.getName(), user);
+		return true;
+	}
+	
+	public boolean setUserTel(Authentication authentication, String tel) {
+		User user = getUserByEmail(authentication.getName());
+		if(user == null) return false;
+		
+		user.setTelephone(tel);
+		this.updateUser(authentication.getName(), user);
+		return true;
 	}
 }
