@@ -13,4 +13,5 @@ import com.example.d20.model.User;
 public interface LoanRepository extends JpaRepository<Loan, Integer> {
 	List<Loan> findAllByItem(Ownership item);
 	List<Loan> findAllByLoanee(User loanee);
+	List<Loan> findAllByStatus(boolean finished);
 }
