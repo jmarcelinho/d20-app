@@ -91,7 +91,7 @@ public class Loan {
 		this.price = price;
 	}
 	
-	public boolean isFinished() {
+	public boolean getFinished() {
 		return this.finished;
 	}
 	
