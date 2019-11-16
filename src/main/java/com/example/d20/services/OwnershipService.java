@@ -32,6 +32,10 @@ public class OwnershipService {
 		if(newOwnership!= null) {
 			newOwnership.setPrice(ownership.getPrice());
 			newOwnership.setInfo(ownership.getInfo());
+			
+			// check if game isn't already loaned before setting
+			// availability to true
+			newOwnership.setAvailability(ownership.getAvailability());
 		}
 		
 		// remember to check if newOwnership is null in dependent functions

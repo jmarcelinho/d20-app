@@ -27,6 +27,16 @@ public class LoanService {
 		return this.loanRepository.save(loan);
 	}
 	
+	public Loan finishLoan(Integer id, Loan loan) {
+		Loan newLoan = this.getLoanById(id);
+		
+		if(newLoan != null) {
+			if(!newLoan.isFinished()) newLoan.finishLoan();
+		}
+		
+		return newLoan;
+	}
+	
 	public boolean delete(Integer id) {
 		Loan d_loan = this.getLoanById(id);
 		

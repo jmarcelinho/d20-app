@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.ManyToOne;
  
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "tb_ownership")
@@ -55,6 +54,10 @@ public class Ownership {
 	
 	public boolean getAvailability() {
 		return this.availability;
+	}
+	
+	public void setAvailability(boolean newAvailability) {
+		this.availability = newAvailability;
 	}
 	
 	public void setPrice(double newPrice) {

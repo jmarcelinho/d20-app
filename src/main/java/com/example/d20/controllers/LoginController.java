@@ -27,9 +27,9 @@ import com.example.d20.model.RoleName;
 import com.example.d20.model.User;
 import com.example.d20.model.Account;
 import com.example.d20.repository.RoleRepository;
-import com.example.d20.repository.UserRepository;
-import com.example.d20.repository.AccountRepository;
 import com.example.d20.security.jwt.JwtProvider;
+import com.example.d20.services.AccountService;
+import com.example.d20.services.UserService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -40,10 +40,10 @@ public class LoginController {
     AuthenticationManager authenticationManager;
 
     @Autowired
-    AccountRepository accountRepository;
+    AccountService accountService;
     
     @Autowired
-    UserRepository userRepository;
+    UserService userService;
     
     @Autowired
     RoleRepository roleRepository;
@@ -63,7 +63,7 @@ public class LoginController {
                         loginRequest.getPassword()
                 )
         );
-
+        
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String jwt = jwtProvider.generateJwtToken(authentication);
@@ -73,13 +73,7 @@ public class LoginController {
     @PostMapping("/signup")
     public ResponseEntity<String> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
     	
-    	System.out.println(signUpRequest.getFname());
-    	System.out.println(signUpRequest.getLname());
-    	System.out.println(signUpRequest.getEmail());
-    	System.out.println(signUpRequest.getTelephone());
-    	System.out.println(signUpRequest.getPassword());
-    	
-        if(accountRepository.existsByEmail(signUpRequest.getEmail())) {
+        if(accountService.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity<String>("Fail -> Email is already in use!",
                     HttpStatus.BAD_REQUEST);
         }
@@ -109,8 +103,8 @@ public class LoginController {
         });
         
         acc.setRoles(roles);
-        accountRepository.save(acc);
-        userRepository.save(user);
+        accountService.addAccount(acc);
+        userService.addUser(user);
         return ResponseEntity.ok().body("User registered successfully!");
     }
 }
