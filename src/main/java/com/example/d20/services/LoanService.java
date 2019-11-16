@@ -55,4 +55,8 @@ public class LoanService {
 	public List<Loan> getLoanByLoanee(User loanee) {
 		return this.loanRepository.findAllByLoanee(loanee);
 	}
+	
+	public List<Loan> getLoanByStatus(boolean finished) {
+		return this.loanRepository.findAllByStatus(finished);
+	}
 }
