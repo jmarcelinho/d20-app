@@ -14,15 +14,23 @@ public class BankAccount {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	private String email;
+	
 	private String number;
 	
 	private String branch;
 	
 	public BankAccount () {}
 	
-	public BankAccount(String branch, String number) {
+	public BankAccount(String email, String branch, String number) {
+		this.email = email;
 		this.number = number;
 		this.branch = branch;
+	}
+	
+	
+	public String getEmail() {
+		return email;
 	}
 
 	public Long getId() {
