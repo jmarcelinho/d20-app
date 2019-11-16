@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.d20.model.Ownership;
+import com.example.d20.model.User;
 import com.example.d20.services.OwnershipService;
+import com.example.d20.services.UserService;
 
 @RestController
 @CrossOrigin
@@ -26,6 +29,9 @@ import com.example.d20.services.OwnershipService;
 public class OwnershipController {
 	@Autowired
 	private OwnershipService ownershipService;
+	
+	@Autowired
+	private UserService userService;
 	
 	@GetMapping
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
@@ -72,4 +78,11 @@ public class OwnershipController {
 		
 		return ResponseEntity.noContent().build();
 	}
+	
+	@GetMapping("/info")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	public List<Ownership> getInfo(Authentication authentication) {
+		User owner = userService.getUserByEmail(authentication.getName());
+        return ownershipService.getOwnershipByOwner(owner);
+    }
 }

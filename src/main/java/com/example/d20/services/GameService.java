@@ -61,4 +61,5 @@ public class GameService {
 	public List<Game> getGameByType(String type) {
 		return this.gameRepository.findAllByName(type);
 	}
+
 }
