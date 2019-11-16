@@ -2,13 +2,11 @@ package com.example.d20.services;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.d20.model.Account;
-import com.example.d20.model.User;
 import com.example.d20.repository.AccountRepository;
 
 @Service

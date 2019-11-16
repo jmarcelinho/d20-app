@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.d20.model.Loan;
-import com.example.d20.model.Ownership;
 import com.example.d20.services.LoanService;
 
 @RestController
