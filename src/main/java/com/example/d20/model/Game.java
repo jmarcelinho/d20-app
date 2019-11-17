@@ -59,6 +59,10 @@ public class Game {
 		Id = id;
 	}
 	
+	public Integer getId() {
+		return this.Id;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

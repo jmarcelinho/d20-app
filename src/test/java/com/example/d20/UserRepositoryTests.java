@@ -25,7 +25,9 @@ public class UserRepositoryTests {
 		Assertions.assertThat( userRepository.findAll().size() ).isEqualTo(0);
 		userRepository.save(user);
 		Assertions.assertThat( userRepository.findAll().size() ).isEqualTo(1);
+		
 		Assertions.assertThat( userRepository.findAllByFname("Matheus").size() ).isEqualTo(1);
+		Assertions.assertThat( userRepository.getOne(user.getId()) ).isEqualTo(user);
 	}
 	
 	// checking if the data persisted is being deleted as it should
