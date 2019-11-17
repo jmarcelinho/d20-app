@@ -10,7 +10,7 @@ import com.example.d20.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer>{
 	User findByCpf(String cpf);
-	User findByEmail(String name);
+	User findByEmail(String email);
 	List<User> findAllByFname(String name);
 	List<User> findAllByLname(String name);
 }
