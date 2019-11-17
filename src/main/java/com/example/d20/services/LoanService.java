@@ -31,7 +31,7 @@ public class LoanService {
 		Loan newLoan = this.getLoanById(id);
 		
 		if(newLoan != null) {
-			if(!newLoan.isFinished()) newLoan.finishLoan();
+			if(!newLoan.getFinished()) newLoan.finishLoan();
 		}
 		
 		return newLoan;
@@ -57,6 +57,6 @@ public class LoanService {
 	}
 	
 	public List<Loan> getLoanByStatus(boolean finished) {
-		return this.loanRepository.findAllByStatus(finished);
+		return this.loanRepository.findAllByFinished(finished);
 	}
 }
