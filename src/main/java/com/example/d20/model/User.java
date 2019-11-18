@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -30,6 +31,7 @@ public class User {
 	private String telephone;
 	
 	@Column(name = "email")
+	@Email
 	private String email;
 	
 	public User() {}
