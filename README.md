@@ -66,38 +66,20 @@ The **signature** verifies that the JWT sender is who they claim to be to ensure
 
 1. **Registering a user**
 ---
-
+![image](https://user-images.githubusercontent.com/28639434/69042298-bc48f680-09cf-11ea-8b35-2e3755102f05.png)
 
 
 2. **Logging in a valid user**
 ---
-
+![image](https://user-images.githubusercontent.com/28639434/69042282-b6531580-09cf-11ea-9df7-ae881ab16e2f.png)
 
 3. **Logging in an invalid user**
 ---
+![image](https://user-images.githubusercontent.com/28639434/69042280-b6531580-09cf-11ea-8d02-d59d858cefcd.png)
 
-
-3. **Using the token in request header & accessing resource**
+4. **Using the token in request Your Account info**
 ---
+![image](https://user-images.githubusercontent.com/28639434/69042270-b226f800-09cf-11ea-97df-4d590784511f.png)
 
-
-4. **Accessing admin resource with invalid permissions/token**
----
-
-
-5. **Logging out the user device**
----
-
-
-6. **Resetting the password**
----
-
-
-7. **Refreshing the authentication token**
----
-
-
-8. **Confirming the user email verification token**
----
 
 
