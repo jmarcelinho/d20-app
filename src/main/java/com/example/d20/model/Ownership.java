@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.ManyToOne;
  
-
 @Entity
 @Table(name = "tb_ownership")
 public class Ownership {
