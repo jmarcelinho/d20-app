@@ -35,8 +35,9 @@ public class OwnershipController {
 	
 	@GetMapping
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public List<Ownership> getAll() {
-		return this.ownershipService.getAllOwnerships();
+	public ResponseEntity<List<Ownership>> getAll() {
+		List<Ownership> ownerships = this.ownershipService.getAllOwnerships();
+		return ResponseEntity.ok(ownerships);
 	}
 	
 	@GetMapping("/{id}")
@@ -59,7 +60,7 @@ public class OwnershipController {
 	}
 	
 	@PutMapping("/{id}")
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Ownership> update(@PathVariable Integer id, @Valid @RequestBody Ownership ownershipBody){
 		Ownership ownership = this.ownershipService.updateOwnership(id, ownershipBody);
 		if(ownership == null) {
@@ -69,6 +70,7 @@ public class OwnershipController {
 	}
 	
 	@DeleteMapping("/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Void> erase(@PathVariable Integer id) {
 		boolean t = this.ownershipService.delete(id);
 		
