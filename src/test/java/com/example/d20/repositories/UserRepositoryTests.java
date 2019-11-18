@@ -1,4 +1,4 @@
-package com.example.d20;
+package com.example.d20.repositories;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
