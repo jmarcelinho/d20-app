@@ -58,7 +58,7 @@ public class LoanControllerTests {
 	
 	// Checking if 'getAll'return StatusCode 200
 	@Test
-	public void getAllGames() {
+	public void getAllLoans() {
 		ResponseEntity response = loanController.getAll();
 		Assertions.assertThat(response.getStatusCodeValue() ).isEqualTo(200);
 	}

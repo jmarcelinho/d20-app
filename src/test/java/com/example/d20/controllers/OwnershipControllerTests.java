@@ -71,7 +71,7 @@ public class OwnershipControllerTests {
 	
 	// Checking if a 'throw' is returned when getOwnershipById receive a negative invalid Id
 	@Test(expected = NoSuchElementException.class)
-	public void getLoanByIdInvalid2() {
+	public void getOwnershipByIdInvalid2() {
 		ownershipController.getOwnershipById(-2);
 	}
 	
