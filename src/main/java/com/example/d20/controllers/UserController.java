@@ -36,8 +36,9 @@ public class UserController {
 	
 	@GetMapping
 	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public List<User> getAll() {
-		return this.userService.getAllUsers();
+	public ResponseEntity<List<User>> getAll() {
+		List<User> users = this.userService.getAllUsers();
+		return ResponseEntity.ok(users);
 	}
 	
 	@GetMapping("/{id}")

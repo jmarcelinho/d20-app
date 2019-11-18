@@ -61,6 +61,13 @@ public class UserControllerTests {
 		userController.add(user);
 	}
 	
+	// Checking if 'getAll'return StatusCode 200
+	@Test
+	public void getAllUsers() {
+		ResponseEntity response = userController.getAll();
+		Assertions.assertThat(response.getStatusCodeValue() ).isEqualTo(200);
+	}
+	
 	// Checking if getUserById return StatusCode 200 when exist a valid Id 
 	@Test
 	public void getUserByIdValid() {
@@ -80,7 +87,7 @@ public class UserControllerTests {
 		userController.getUserById(-2);
 	}
 	
-	// Checking if getUserById return StatusCode 200 when exist a valid Name
+	// Checking if getUserByName return StatusCode 200 when exist a valid Name
 	// and the list of user's with this name
 	@Test
 	public void getUserByNameValid() {
@@ -90,7 +97,7 @@ public class UserControllerTests {
 		Assertions.assertThat(users.size()).isGreaterThan(0);
 	}
 	
-	// Checking if getUserById return StatusCode 200 when exist a invalid Name
+	// Checking if getUserByName return StatusCode 200 when exist a invalid Name
 	// but return a empty list of User's
 	@Test
 	public void getUserByFnameInvalid() {

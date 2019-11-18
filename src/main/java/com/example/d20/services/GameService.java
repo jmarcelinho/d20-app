@@ -55,11 +55,11 @@ public class GameService {
 	}
 	
 	public List<Game> getGameByGenre(String genre) {
-		return this.gameRepository.findAllByName(genre);
+		return this.gameRepository.findAllByGenre(genre);
 	}
 	
 	public List<Game> getGameByType(String type) {
-		return this.gameRepository.findAllByName(type);
+		return this.gameRepository.findAllByType(type);
 	}
 
 }
