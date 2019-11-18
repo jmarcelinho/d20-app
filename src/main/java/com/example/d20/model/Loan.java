@@ -59,6 +59,9 @@ public class Loan {
 		this.price = item.getPrice();
 	}
 	
+	public Integer getId() {
+		return this.Id;
+	}
 	public Ownership getItem() {
 		return this.item;
 	}

@@ -39,6 +39,9 @@ public class Ownership {
 		this.availability = availability;
 	}
 	
+	public Integer getId() {
+		return this.Id;
+	}
 	public User getOwner() {
 		return this.owner;
 	}
