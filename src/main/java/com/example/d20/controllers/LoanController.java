@@ -29,8 +29,9 @@ public class LoanController {
 	
 	@GetMapping
 	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public List<Loan> getAll() {
-		return this.loanService.getAllLoans();
+	public ResponseEntity<List<Loan>> getAll() {
+		List<Loan> loans = this.loanService.getAllLoans();
+		return ResponseEntity.ok(loans);
 	}
 	
 	@GetMapping("/{id}")

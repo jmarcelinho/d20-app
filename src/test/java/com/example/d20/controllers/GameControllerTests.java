@@ -70,7 +70,7 @@ public class GameControllerTests {
 		gameController.getGameById(-2);
 	}
 	
-	// Checking if getUserByName return StatusCode 200 when exist a valid Name
+	// Checking if getGameByName return StatusCode 200 when exist a valid Name
 	// and the list of game's with this name
 	@Test
 	public void getGameByNameValid() {

@@ -34,9 +34,10 @@ public class OwnershipController {
 	private UserService userService;
 	
 	@GetMapping
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public List<Ownership> getAll() {
-		return this.ownershipService.getAllOwnerships();
+	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	public ResponseEntity<List<Ownership>> getAll() {
+		List<Ownership> ownerships = this.ownershipService.getAllOwnerships();
+		return ResponseEntity.ok(ownerships);
 	}
 	
 	@GetMapping("/{id}")
