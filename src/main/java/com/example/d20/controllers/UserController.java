@@ -54,27 +54,17 @@ public class UserController {
 	
 	@GetMapping("/name/{name}")
 	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public List<User> getUserByName(@PathVariable String name) {
+	public ResponseEntity<List<User> > getUserByName(@PathVariable String name) {
         List<User> fuser = userService.getUserByFname(name);
         List<User> luser = userService.getUserByLname(name);
         fuser.addAll(luser);
-        return fuser;
+        return ResponseEntity.ok(fuser);
     }
 	
 	@PostMapping
 	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<User> add(@Valid @RequestBody User userBody){
 		User user = this.userService.addUser(userBody);
-		return ResponseEntity.ok(user);
-	}
-	
-	@PutMapping("/{id}")
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public ResponseEntity<User> update(@PathVariable Integer id, @Valid @RequestBody User userBody){
-		User user = this.userService.updateUser(id, userBody);
-		if(user == null) {
-			return ResponseEntity.notFound().build();
-		}
 		return ResponseEntity.ok(user);
 	}
 	
