@@ -35,13 +35,13 @@ public class UserController {
 	private AccountService accountService;
 	
 	@GetMapping
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public List<User> getAll() {
 		return this.userService.getAllUsers();
 	}
 	
 	@GetMapping("/{id}")
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<User> getUserById(@PathVariable Integer id){
 		User user = this.userService.getUserById(id);
 		
@@ -53,7 +53,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/name/{name}")
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public List<User> getUserByName(@PathVariable String name) {
         List<User> fuser = userService.getUserByFname(name);
         List<User> luser = userService.getUserByLname(name);
@@ -62,7 +62,7 @@ public class UserController {
     }
 	
 	@PostMapping
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<User> add(@Valid @RequestBody User userBody){
 		User user = this.userService.addUser(userBody);
 		return ResponseEntity.ok(user);
@@ -79,7 +79,7 @@ public class UserController {
 	}
 	
 	@DeleteMapping("/{id}")
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<Void> erase(@PathVariable Integer id) {
 		boolean t = this.userService.delete(id);
 		
@@ -91,7 +91,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/info")
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public User getInfo(Authentication authentication) {
         User user = userService.getUserByEmail(authentication.getName());
         return user;
@@ -99,7 +99,7 @@ public class UserController {
 	
 	
 	@PostMapping("/edit/name")
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<String> setFname(Authentication authentication,@Valid @RequestBody EditForm form) {
         if(accountService.verifyByAuth(authentication, form.getPassword())) {
         	if(userService.setUserName(authentication, form.getItem())) {
@@ -113,7 +113,7 @@ public class UserController {
     }
 	
 	@PostMapping("/edit/telephone")
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<String> setTelephone(Authentication authentication,@Valid @RequestBody EditForm form) {
         if(accountService.verifyByAuth(authentication, form.getPassword())) {
         	if(userService.setUserTel(authentication, form.getItem())) {
@@ -127,7 +127,7 @@ public class UserController {
     }
 	
 	@PostMapping("/edit/password")
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<String> setPassword(Authentication authentication,@Valid @RequestBody EditForm form) {
         if(accountService.verifyByAuth(authentication, form.getPassword())) {
         	if(accountService.setAccPassword(authentication, form.getItem())) {
