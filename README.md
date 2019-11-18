@@ -1,6 +1,6 @@
 ## D20-APP ##
 
-A demo project explaining the backend authentication using JWT (Json Web Token) authentication using Spring Security &amp; MySQL JPA.
+A system allowing the rental of card games and trays without the need for an existing playroom in the city, where users can either make their own rental games and rent from other users.
 There's support for the following features:
 
 * Conventional email/username based registration with admin support
@@ -14,7 +14,6 @@ There's support for the following features:
 * API to refresh JWT tokens once the temporary JWT expires. 
 * API to check availability of username/email during registration.
 
-![](https://cdn-images-1.medium.com/max/1334/1*7T41R0dSLEzssIXPHpvimQ.png)
 
 ---
 
@@ -31,6 +30,7 @@ The project has been configured with a basic Swagger docket that exposes the com
 ## JWT ##
 JSON Web Tokens are an open, industry standard RFC 7519 method for representing claims securely between two parties.
 
+![](https://cdn-images-1.medium.com/max/1334/1*7T41R0dSLEzssIXPHpvimQ.png)
 
 ## Exception Handling ##
 The app throws custom exceptions wherever necessary which are captured through a controller advice. It then returns the appropriate error response to the caller
@@ -51,16 +51,13 @@ Moreover, entities are validated using JSR-303 Validation constraints.
 
 ---
 
-## Steps to Setup the Spring Boot Back end app
-2. **Run the app**
+## Access D20-APP
+1. **Heroku Application**
 
-	You can run the spring boot app by typing the following command -
+	You can run D20-app accessing the site -
 
-	```bash
-	mvn spring-boot:run
-	```
-
-	The server will start on port 9004. Token default expiration is 600000ms i.e 10 minutes.
+	```link
+	https://d20-app.herokuapp.com
 	```
   
 ### Contribution ###
