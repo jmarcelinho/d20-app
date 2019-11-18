@@ -6,14 +6,11 @@ There's support for the following features:
 * Conventional email/username based registration with admin support
 * Conventional Login using Spring Security and generation of JWT token
 * Multiple device login and logout support
-* Support for expiration bases email verification. Mail is sent upon registration. 
-* Resend the email confirmation email if old one expires
 * Support for password updation once logged in
-* Support for forgot-password functionality with password reset token sent to mail.
 * Supports admin protected urls leveraging Spring security
-* API to refresh JWT tokens once the temporary JWT expires. 
-* API to check availability of username/email during registration.
-
+* Support to Add Games, Users, Ownerships and Loan (As Admin)
+* Support to Erase Games, Users, Ownerships and Loan (As Admin)
+* Conventional Gets for Games, Users, Ownerships and Loan
 
 ---
 
@@ -32,20 +29,11 @@ JSON Web Tokens are an open, industry standard RFC 7519 method for representing 
 
 ![](https://cdn-images-1.medium.com/max/1334/1*7T41R0dSLEzssIXPHpvimQ.png)
 
-## Exception Handling ##
-The app throws custom exceptions wherever necessary which are captured through a controller advice. It then returns the appropriate error response to the caller
-* AppException
-* BadRequestException
-* ResourceAlreadyInUseException
-* ResourceNotFoundException
-* UserLoginException
-* UserRegistrationException
-* MethodArgumentNotValidException
-* UserLogoutException
-* TokenRefreshException
-* UpdatePasswordException
-* PasswordResetException
-* PasswordResetLinkException
+**Spring Security and JWT Configuration**
+
+We will be configuring Spring Security and JWT for performing 2 operations-
+* Generating JWT — Expose a POST API with mapping /authenticate. On passing correct username and password it will generate a JSON Web Token(JWT)
+* Validating JWT — If user tries to access GET API with mapping /hello. It will allow access only if request has a valid JSON Web Token(JWT)
 
 Moreover, entities are validated using JSR-303 Validation constraints. 
 
