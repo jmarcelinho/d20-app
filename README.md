@@ -35,7 +35,17 @@ We will be configuring Spring Security and JWT for performing 2 operations-
 * Generating JWT — Expose a POST API with mapping /authenticate. On passing correct username and password it will generate a JSON Web Token(JWT)
 * Validating JWT — If user tries to access GET API with mapping /hello. It will allow access only if request has a valid JSON Web Token(JWT)
 
-Moreover, entities are validated using JSR-303 Validation constraints. 
+**JSON Web Token Structure**
+
+A JWT consists of three parts separated by a dot.
+
+> header.payload.signature
+
+The **header** consists of two different parts: the token type (in this case JWT), and the name of the hashing algorithm, HMAC SHA256 or RSA.
+
+The **payload** contains what we call claims. Claims are entity attributes (in this case user) and metadata.
+
+The **signature** verifies that the JWT sender is who they claim to be to ensure that the message has not changed during traffic. To create the signature, we use the Base64 encoded header, the Base64 encoded payload, and the algorithm specified in the header.
 
 ---
 
@@ -44,9 +54,7 @@ Moreover, entities are validated using JSR-303 Validation constraints.
 
 	You can run D20-app accessing the site -
 
-	```link
-	https://d20-app.herokuapp.com
-	```
+	[https://d20-app.herokuapp.com](https://d20-app.herokuapp.com)
   
 ### Contribution ###
 * Please fork the project and adapt it to your use case.
