@@ -8,21 +8,20 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.example.d20.model.User;
-import com.example.d20.services.UserService;
+import com.example.d20.model.Game;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserServiceTest {
+public class GameServiceTests {
 	
 	@Autowired
-	private UserService userService;
+	private GameService gameService;
 	
 	@Test
 	public void persistenceTest() {
-		User user = new User("Matheus", "Oliveira", "12131212", "aaa@gmail.com");
-		Assertions.assertThat(userService.getAllUsers().size()).isEqualTo(0);
-		userService.addUser(user);
-		Assertions.assertThat(userService.getAllUsers().size()).isEqualTo(1);
+		Game game = new Game("Munchkin", "Tabuleiro", "RPG");
+		Assertions.assertThat(game.getName()).isEqualTo("Munchkin");
+		
+		Assertions.assertThat(gameService.addGame(game)).isNotNull();
 	}
 }
