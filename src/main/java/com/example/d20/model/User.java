@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -27,9 +29,11 @@ public class User {
 	private String cpf;
 	
 	@Column(name = "telephone")
+	@Size(min=8, max = 9)
 	private String telephone;
 	
 	@Column(name = "email")
+	@Email
 	private String email;
 	
 	public User() {}
