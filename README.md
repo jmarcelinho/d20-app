@@ -20,8 +20,11 @@ There's support for the following features:
 
 ## Swagger Docs ##
 The project has been configured with a basic Swagger docket that exposes the commonly used API's along with the expected params.
-![image](https://user-images.githubusercontent.com/12872673/45046897-24ded880-b095-11e8-8930-7b678e2843bb.png)
-
+![image](https://user-images.githubusercontent.com/28639434/69038898-97518500-09c9-11ea-962e-099364fc6975.png)
+![image](https://user-images.githubusercontent.com/28639434/69038875-843eb500-09c9-11ea-9679-c0458295f0d7.png)
+![image](https://user-images.githubusercontent.com/28639434/69038884-8b65c300-09c9-11ea-9392-9d5a62f05871.png)
+![image](https://user-images.githubusercontent.com/28639434/69038911-9e789300-09c9-11ea-887e-ec8300349257.png)
+![image](https://user-images.githubusercontent.com/28639434/69038903-991b4880-09c9-11ea-85ab-9e2e1177e08d.png)
 
 ---
 
