@@ -10,7 +10,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.example.d20.model.User;
 import com.example.d20.model.Game;
 import com.example.d20.model.Ownership;
+import com.example.d20.repository.GameRepository;
 import com.example.d20.repository.OwnershipRepository;
+import com.example.d20.repository.UserRepository;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -18,11 +20,20 @@ public class OwnershipRepositoryTests {
 	@Autowired
 	OwnershipRepository ownershipRepository;
 	
+	@Autowired
+	UserRepository userRepository;
+	
+	@Autowired
+	GameRepository gameRepository;
+	
 	// checking whether the data is being persisted or not
 	@Test
 	public void persistenceTest() {
 		Game game = new Game("Munchkin", "Tabuleiro", "RPG");
 		User owner = new User("Matheus", "Oliveira", "12131212", "aaa@gmail.com");
+		
+		userRepository.save(owner);
+		gameRepository.save(game);
 		
 		Ownership ownership = new Ownership(owner, game, 15.5, "Teste", true);
 		Assertions.assertThat(ownership.getPrice()).isEqualTo(15.5);
@@ -41,6 +52,9 @@ public class OwnershipRepositoryTests {
 		User owner = new User("Matheus", "Oliveira", "12131212", "aaa@gmail.com");
 		Ownership ownership = new Ownership(owner, game, 15.5, "Teste", true);
 		
+		userRepository.save(owner);
+		gameRepository.save(game);
+		
 		ownershipRepository.save(ownership);
 		Assertions.assertThat( ownershipRepository.findAll().size() ).isEqualTo(1);
 		
@@ -55,6 +69,9 @@ public class OwnershipRepositoryTests {
 		User owner = new User("Matheus", "Oliveira", "12131212", "aaa@gmail.com");
 		Ownership ownership = new Ownership(owner, game, 15.5, "Teste", true);
 		
+		userRepository.save(owner);
+		gameRepository.save(game);
+		
 		ownershipRepository.save(ownership);
 		
 		Assertions.assertThat( ownershipRepository.findAllByAvailability(false).size() ).isEqualTo(0);
@@ -68,7 +85,7 @@ public class OwnershipRepositoryTests {
 		Assertions.assertThat( ownershipRepository.findAllByAvailability(false).size() ).isEqualTo(1);
 		
 		Ownership updatedOwnership = ownershipRepository.findAllByAvailability(false).get(0);
-		Assertions.assertThat(updatedOwnership).isEqualTo(game);
+		Assertions.assertThat(updatedOwnership).isEqualTo(ownership);
 	}
 	
 	// checking if findAllByOwner is working as intended
@@ -80,6 +97,10 @@ public class OwnershipRepositoryTests {
 		
 		Game game2 = new Game("Coup", "Cartas", "RPG");
 		Ownership ownership2 = new Ownership(owner, game2, 20, "Testezinho", false);
+		
+		userRepository.save(owner);
+		gameRepository.save(game);
+		gameRepository.save(game2);
 		
 		ownershipRepository.save(ownership);
 		ownershipRepository.save(ownership2);
@@ -101,6 +122,11 @@ public class OwnershipRepositoryTests {
 		
 		Game game3 = new Game("Uaaaa", "Cartas", "TT");
 		Ownership ownership3 = new Ownership(owner, game3, 10, "Testezozer", false);
+		
+		userRepository.save(owner);
+		gameRepository.save(game);
+		gameRepository.save(game2);
+		gameRepository.save(game3);
 		
 		ownershipRepository.save(ownership);
 		ownershipRepository.save(ownership2);
