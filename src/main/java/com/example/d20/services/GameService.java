@@ -33,7 +33,6 @@ public class GameService {
 			newGame.setType(game.getType());
 			newGame.setGenre(game.getGenre());
 			
-			this.delete(id);
 			this.gameRepository.save(newGame);
 			// remember to update picture attribute by the time we have it
 		}

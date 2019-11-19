@@ -20,7 +20,7 @@ public class BankAccountService {
 		return this.bankRepository.findByEmail(email).get();
 	}
 	
-	public boolean setBankAccount(String email, String number, String branch) {
+	public boolean updateBankAccount(String email, String number, String branch) {
 		BankAccount bankAccount = getBankAccountByEmail(email);
 		
 		if(bankAccount == null) return false;

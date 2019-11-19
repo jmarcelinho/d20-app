@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 public class Ownership {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer Id;
+	private Integer id;
 	
 	@ManyToOne
 	private User owner;
@@ -40,7 +40,7 @@ public class Ownership {
 	}
 	
 	public Integer getId() {
-		return this.Id;
+		return this.id;
 	}
 	public User getOwner() {
 		return this.owner;
@@ -78,7 +78,7 @@ public class Ownership {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((Id == null) ? 0 : Id.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((game == null) ? 0 : game.hashCode());
 		result = prime * result + ((info == null) ? 0 : info.hashCode());
 		result = prime * result + ((owner == null) ? 0 : owner.hashCode());
@@ -97,10 +97,10 @@ public class Ownership {
 		if (getClass() != obj.getClass())
 			return false;
 		Ownership other = (Ownership) obj;
-		if (Id == null) {
-			if (other.Id != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!Id.equals(other.Id))
+		} else if (!id.equals(other.id))
 			return false;
 		if (game == null) {
 			if (other.game != null)

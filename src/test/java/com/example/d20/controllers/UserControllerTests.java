@@ -30,7 +30,7 @@ public class UserControllerTests {
 	@Before
 	public void addUserValid() {
 		User user = new User("Matheus", "Oliveira", "12131212", "aaa@gmail.com");
-		ResponseEntity response = userController.add(user);
+		ResponseEntity<User> response = userController.add(user);
 		Assertions.assertThat(response.getStatusCodeValue() ).isEqualTo(200);
 		user = new User("Amandio", "Ferreira", "12131212", "amanaio@gmail.com");
 		response = userController.add(user);
@@ -64,14 +64,14 @@ public class UserControllerTests {
 	// Checking if 'getAll'return StatusCode 200
 	@Test
 	public void getAllUsers() {
-		ResponseEntity response = userController.getAll();
+		ResponseEntity<List<User>> response = userController.getAll();
 		Assertions.assertThat(response.getStatusCodeValue() ).isEqualTo(200);
 	}
 	
 	// Checking if getUserById return StatusCode 200 when exist a valid Id 
 	@Test
 	public void getUserByIdValid() {
-		ResponseEntity response = userController.getUserById(1);
+		ResponseEntity<User> response = userController.getUserById(1);
 		Assertions.assertThat(response.getStatusCodeValue() ).isEqualTo(200);
 	}
 	
@@ -91,7 +91,7 @@ public class UserControllerTests {
 	// and the list of user's with this name
 	@Test
 	public void getUserByNameValid() {
-		ResponseEntity response = userController.getUserByName("Amandio");
+		ResponseEntity<List<User>> response = userController.getUserByName("Amandio");
 		Assertions.assertThat(response.getStatusCodeValue() ).isEqualTo(200);
 		List<User> users = (List<User>) response.getBody();
 		Assertions.assertThat(users.size()).isGreaterThan(0);
@@ -101,7 +101,7 @@ public class UserControllerTests {
 	// but return a empty list of User's
 	@Test
 	public void getUserByFnameInvalid() {
-		ResponseEntity response = userController.getUserByName("Jose");
+		ResponseEntity<List<User>> response = userController.getUserByName("Jose");
 		Assertions.assertThat(response.getStatusCodeValue() ).isEqualTo(200);
 		List<User> users = (List<User>) response.getBody();
 		Assertions.assertThat(users.size()).isEqualTo(0);
@@ -110,13 +110,13 @@ public class UserControllerTests {
 	// Checking if 'erase' return StatusCode 204 when receive a valid ID
 	@Test
 	public void eraseValid() {
-		ResponseEntity response = userController.erase(3);
+		ResponseEntity<Void> response = userController.erase(3);
 		Assertions.assertThat(response.getStatusCodeValue() ).isEqualTo(204);
 	}
 	
 	// Checking if 'erase' return StatusCode 404 when receive a invalid ID
 	@Test(expected = NoSuchElementException.class)
 	public void eraseInvalid() {
-		ResponseEntity response = userController.erase(5);
+		ResponseEntity<Void> response = userController.erase(5);
 	}
 }

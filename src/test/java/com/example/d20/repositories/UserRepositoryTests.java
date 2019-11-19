@@ -53,14 +53,14 @@ public class UserRepositoryTests {
 		Assertions.assertThat( userRepository.findAllByFname("Matheus").size() ).isEqualTo(1);
 		
 		user.setFname("Theusao");
-		user.setTelephone("332211");
+		user.setTelephone("33221551");
 		userRepository.save(user);
 		
 		Assertions.assertThat( userRepository.findAllByFname("Matheus").size() ).isEqualTo(0);
 		Assertions.assertThat( userRepository.findAllByFname("Theusao").size() ).isEqualTo(1);
 		
 		User updatedUser = userRepository.getOne(user.getId());
-		Assertions.assertThat( updatedUser.getTelephone() ).isEqualTo("332211");
+		Assertions.assertThat( updatedUser.getTelephone() ).isEqualTo("33221551");
 	}
 	
 	// checking if findByCpf is working as intended
@@ -121,7 +121,7 @@ public class UserRepositoryTests {
 	@Test
 	public void findAllByFnameTest() {
 		User user = new User("Matheus", "Oliveira", "1234", "12131212", "aaa@gmail.com");
-		User user2 = new User("Matheus", "Dae", "4321", "645323", "bbb@gmail.com");
+		User user2 = new User("Matheus", "Dae", "4321", "64555323", "bbb@gmail.com");
 		
 		userRepository.save(user);
 		userRepository.save(user2);

@@ -31,7 +31,7 @@ public class UserServiceTest {
 		
 		Assertions.assertThat(userService.getUserByFname("Matheus").size()).isEqualTo(1);
 	}
-	
+
 	// checking if the data persisted is being deleted as it should
 	@Test
 	public void deleteTest() {
@@ -57,7 +57,7 @@ public class UserServiceTest {
 		Assertions.assertThat(userService.getUserByFname("Matheus").size()).isEqualTo(1);
 		
 		user.setFname("Theusao");
-		user.setTelephone("332211");
+		user.setTelephone("12131212");
 		
 		userService.updateUser(user.getEmail(), user);
 		
@@ -82,7 +82,7 @@ public class UserServiceTest {
 	@Test
 	public void findAllByFNameTest() {
 		User user = new User("Matheus", "Oliveira", "1234", "12131212", "aaa@gmail.com");
-		User user2 = new User("Matheus", "Dae", "4321", "645323", "bbb@gmail.com");
+		User user2 = new User("Matheus", "Dae", "4321", "64532325", "bbb@gmail.com");
 		
 		userService.addUser(user);
 		userService.addUser(user2);

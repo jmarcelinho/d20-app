@@ -17,7 +17,7 @@ public class User {
 	@GeneratedValue(generator = "increment")
 	@GenericGenerator(name = "increment", strategy = "increment")
 	@Column(name = "IdUser")
-	private Integer Id;
+	private Integer id;
 	
 	@Column(name = "fname")
 	private String fname;
@@ -54,11 +54,7 @@ public class User {
 	}
 	
 	public Integer getId() {
-		return this.Id;
-	}
-
-	public void setId(Integer id) {
-		this.Id = id;
+		return this.id;
 	}
 
 	public String getFname() {

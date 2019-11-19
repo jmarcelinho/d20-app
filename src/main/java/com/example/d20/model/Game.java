@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class Game {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer Id;
+	private Integer id;
 	
 	@Column(name = "name")
 	private String name;
@@ -55,19 +55,15 @@ public class Game {
 		this.genre = newGenre;
 	}
 	
-	public void setId(Integer id) {
-		Id = id;
-	}
-	
 	public Integer getId() {
-		return this.Id;
+		return this.id;
 	}
 	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((Id == null) ? 0 : Id.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((genre == null) ? 0 : genre.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
@@ -83,10 +79,10 @@ public class Game {
 		if (getClass() != obj.getClass())
 			return false;
 		Game other = (Game) obj;
-		if (Id == null) {
-			if (other.Id != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!Id.equals(other.Id))
+		} else if (!id.equals(other.id))
 			return false;
 		if (genre == null) {
 			if (other.genre != null)

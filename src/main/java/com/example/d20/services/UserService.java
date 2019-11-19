@@ -31,20 +31,21 @@ public class UserService {
 		User newUser = this.getUserById(id);
 		
 		if(newUser != null) {
-			newUser.setId(id);
-			newUser.setCpf(user.getCpf());
 			newUser.setFname(user.getFname());
 			newUser.setLname(user.getLname());
 			newUser.setTelephone(user.getTelephone());
+			this.userRepository.save(newUser);
 		}
-		this.userRepository.save(newUser);
 		return newUser;
 	}
 	
 	public boolean updateUser(String email, User user) {
-		if( this.delete(email) == false) return false;
-		this.userRepository.save(user);
-		return true;
+		User newUser = getUserByEmail(email);
+		if(newUser != null) {
+			this.updateUser(newUser.getId(), user);
+			return true;
+		}
+		return false;
 	}
 	
 	public boolean delete(Integer id) {

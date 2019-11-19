@@ -36,7 +36,7 @@ public class LoanServiceTests {
 		public void persistenceTest() {
 			Game game = new Game("Munchkin", "Tabuleiro", "RPG");
 			User owner = new User("Matheus", "Oliveira", "12131212", "aaa@gmail.com");
-			User loanee = new User("Pigmeu", "Zinho", "43211", "pigpig@oink.com");
+			User loanee = new User("Pigmeu", "Zinho", "43255511", "pigpig@oink.com");
 			Ownership ownership = new Ownership(owner, game, 15.5, "Teste", true);
 			
 			userService.addUser(owner);
@@ -59,7 +59,7 @@ public class LoanServiceTests {
 		public void deleteTest() {
 			Game game = new Game("Munchkin", "Tabuleiro", "RPG");
 			User owner = new User("Matheus", "Oliveira", "12131212", "aaa@gmail.com");
-			User loanee = new User("Pigmeu", "Zinho", "43211", "pigpig@oink.com");
+			User loanee = new User("Pigmeu", "Zinho", "43255511", "pigpig@oink.com");
 			Ownership ownership = new Ownership(owner, game, 15.5, "Teste", true);
 			
 			userService.addUser(owner);
@@ -83,7 +83,7 @@ public class LoanServiceTests {
 			Game game2 = new Game("UAAAAAAAA", "Cartas", "Vrau");
 			
 			User owner = new User("Matheus", "Oliveira", "12131212", "aaa@gmail.com");
-			User loanee = new User("Pigmeu", "Zinho", "43211", "pigpig@oink.com");
+			User loanee = new User("Pigmeu", "Zinho", "43255511", "pigpig@oink.com");
 			
 			Ownership ownership = new Ownership(owner, game, 15.5, "Teste", true);
 			Ownership ownership2 = new Ownership(owner, game2, 5.3, "yooo", true);
@@ -113,8 +113,8 @@ public class LoanServiceTests {
 			Game game = new Game("Munchkin", "Tabuleiro", "RPG");
 			
 			User owner = new User("Matheus", "Oliveira", "12131212", "aaa@gmail.com");
-			User loanee = new User("Pigmeu", "Zinho", "43211", "pigpig@oink.com");
-			User loanee2 = new User("Dougao", "Watson", "12343", "dougasso@vrauvrau.com");
+			User loanee = new User("Pigmeu", "Zinho", "43255511", "pigpig@oink.com");
+			User loanee2 = new User("Dougao", "Watson", "12355543", "dougasso@vrauvrau.com");
 			
 			Ownership ownership = new Ownership(owner, game, 15.5, "Teste", true);
 			
@@ -143,8 +143,8 @@ public class LoanServiceTests {
 			Game game = new Game("Munchkin", "Tabuleiro", "RPG");
 			
 			User owner = new User("Matheus", "Oliveira", "12131212", "aaa@gmail.com");
-			User loanee = new User("Pigmeu", "Zinho", "43211", "pigpig@oink.com");
-			User loanee2 = new User("Dougao", "Watson", "12343", "dougasso@vrauvrau.com");
+			User loanee = new User("Pigmeu", "Zinho", "43215551", "pigpig@oink.com");
+			User loanee2 = new User("Dougao", "Watson", "12345553", "dougasso@vrauvrau.com");
 			
 			Ownership ownership = new Ownership(owner, game, 15.5, "Teste", true);
 			
@@ -173,8 +173,8 @@ public class LoanServiceTests {
 			Game game = new Game("Munchkin", "Tabuleiro", "RPG");
 			
 			User owner = new User("Matheus", "Oliveira", "12131212", "aaa@gmail.com");
-			User loanee = new User("Pigmeu", "Zinho", "43211", "pigpig@oink.com");
-			User loanee2 = new User("Dougao", "Watson", "12343", "dougasso@vrauvrau.com");
+			User loanee = new User("Pigmeu", "Zinho", "43255511", "pigpig@oink.com");
+			User loanee2 = new User("Dougao", "Watson", "15552343", "dougasso@vrauvrau.com");
 			
 			Ownership ownership = new Ownership(owner, game, 15.5, "Teste", true);
 			

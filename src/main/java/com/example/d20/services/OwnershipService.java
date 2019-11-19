@@ -36,7 +36,6 @@ public class OwnershipService {
 			// check if game isn't already loaned before setting
 			// availability to true
 			newOwnership.setAvailability(ownership.getAvailability());
-			this.delete(id);
 			this.ownershipRepository.save(newOwnership);
 		}
 		
