@@ -6,15 +6,12 @@ import javax.validation.constraints.*;
 
 public class SignUpForm {
     @NotBlank
-    @Size(min = 3, max = 50)
     private String fname;
     
     @NotBlank
-    @Size(min = 3, max = 50)
     private String lname;
 
     @NotBlank
-    @Size(max = 60)
     @Email
     private String email;
     
@@ -24,9 +21,18 @@ public class SignUpForm {
     private Set<String> role;
     
     @NotBlank
-    @Size(min = 4, max = 40)
+    @Size(min = 4)
     private String password;
-
+    
+    public SignUpForm(String fname, String lname, String email, String telephone, Set<String> role, String password) {
+    	this.fname = fname;
+    	this.lname = lname;
+    	this.email = email;
+    	this.telephone = telephone;
+    	this.role = role;
+    	this.password = password;
+    }
+    
     public String getFname() {
         return fname;
     }

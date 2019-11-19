@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -16,7 +17,7 @@ public class User {
 	@GeneratedValue(generator = "increment")
 	@GenericGenerator(name = "increment", strategy = "increment")
 	@Column(name = "IdUser")
-	private Integer Id;
+	private Integer id;
 	
 	@Column(name = "fname")
 	private String fname;
@@ -32,6 +33,7 @@ public class User {
 	private String telephone;
 	
 	@Column(name = "email")
+	@Email
 	private String email;
 	
 	public User() {}
@@ -52,11 +54,7 @@ public class User {
 	}
 	
 	public Integer getId() {
-		return this.Id;
-	}
-
-	public void setId(Integer id) {
-		this.Id = id;
+		return this.id;
 	}
 
 	public String getFname() {

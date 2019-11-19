@@ -16,7 +16,7 @@ import javax.persistence.ManyToOne;
 public class Loan {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer Id;
+	private Integer id;
 	
 	@ManyToOne
 	private Ownership item;
@@ -59,6 +59,9 @@ public class Loan {
 		this.price = item.getPrice();
 	}
 	
+	public Integer getId() {
+		return this.id;
+	}
 	public Ownership getItem() {
 		return this.item;
 	}

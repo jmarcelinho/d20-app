@@ -32,8 +32,11 @@ public class GameService {
 			newGame.setName(game.getName());
 			newGame.setType(game.getType());
 			newGame.setGenre(game.getGenre());
+			
+			this.gameRepository.save(newGame);
 			// remember to update picture attribute by the time we have it
 		}
+		
 		
 		// remember to check if newGame is null in dependent functions
 		return newGame;
@@ -55,11 +58,11 @@ public class GameService {
 	}
 	
 	public List<Game> getGameByGenre(String genre) {
-		return this.gameRepository.findAllByName(genre);
+		return this.gameRepository.findAllByGenre(genre);
 	}
 	
 	public List<Game> getGameByType(String type) {
-		return this.gameRepository.findAllByName(type);
+		return this.gameRepository.findAllByType(type);
 	}
 
 }
