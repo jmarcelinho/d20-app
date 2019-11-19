@@ -28,28 +28,28 @@ public class GameController {
 	private GameService gameService;
 	
 	@GetMapping
-	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<List<Game>> getAll() {
 		List<Game> games = this.gameService.getAllGames();
 		return ResponseEntity.ok(games);
 	}
 	
 	@GetMapping("/name/{name}")
-	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<List<Game>> getGameByName(@PathVariable String name){
 		List<Game> games = this.gameService.getGameByName(name);
 		return ResponseEntity.ok(games);
 	}
 	
 	@GetMapping("/type/{type}")
-	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<List<Game>> getGameByType(@PathVariable String type){
 		List<Game> games = this.gameService.getGameByType(type);
 		return ResponseEntity.ok(games);
 	}
 	
 	@GetMapping("/genre/{genre}")
-	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<List<Game>> getGameByGenre(@PathVariable String genre){
 		List<Game> games = this.gameService.getGameByGenre(genre);
 		return ResponseEntity.ok(games);
@@ -57,7 +57,6 @@ public class GameController {
 	
 	
 	@GetMapping("/{id}")
-	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<Game> getGameById(@PathVariable Integer id){
 		Game game = this.gameService.getGameById(id);
 		
@@ -69,14 +68,14 @@ public class GameController {
 	}
 	
 	@PostMapping
-	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Game> add(@Valid @RequestBody Game gameBody){
 		Game game = this.gameService.addGame(gameBody);
 		return ResponseEntity.ok(game);
 	}
 	
 	@PutMapping("/{id}")
-	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Game> update(@PathVariable Integer id, @Valid @RequestBody Game gameBody){
 		Game game = this.gameService.updateGame(id, gameBody);
 		if(game == null) {
@@ -86,7 +85,7 @@ public class GameController {
 	}
 	
 	@DeleteMapping("/{id}")
-	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Void> erase(@PathVariable Integer id) {
 		boolean t = this.gameService.delete(id);
 		

@@ -34,14 +34,14 @@ public class OwnershipController {
 	private UserService userService;
 	
 	@GetMapping
-	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<List<Ownership>> getAll() {
 		List<Ownership> ownerships = this.ownershipService.getAllOwnerships();
 		return ResponseEntity.ok(ownerships);
 	}
 	
 	@GetMapping("/{id}")
-	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<Ownership> getOwnershipById(@PathVariable Integer id){
 		Ownership ownership = this.ownershipService.getOwnershipById(id);
 		
@@ -53,14 +53,14 @@ public class OwnershipController {
 	}
 	
 	@PostMapping
-	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<Ownership> add(@Valid @RequestBody Ownership ownershipBody){
 		Ownership ownership = this.ownershipService.addOwnership(ownershipBody);
 		return ResponseEntity.ok(ownership);
 	}
 	
 	@PutMapping("/{id}")
-	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Ownership> update(@PathVariable Integer id, @Valid @RequestBody Ownership ownershipBody){
 		Ownership ownership = this.ownershipService.updateOwnership(id, ownershipBody);
 		if(ownership == null) {
@@ -69,7 +69,8 @@ public class OwnershipController {
 		return ResponseEntity.ok(ownership);
 	}
 	
-	//@DeleteMapping("/{id}")
+	@DeleteMapping("/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Void> erase(@PathVariable Integer id) {
 		boolean t = this.ownershipService.delete(id);
 		
@@ -81,7 +82,7 @@ public class OwnershipController {
 	}
 	
 	@GetMapping("/info")
-	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public List<Ownership> getInfo(Authentication authentication) {
 		User owner = userService.getUserByEmail(authentication.getName());
         return ownershipService.getOwnershipByOwner(owner);

@@ -28,14 +28,14 @@ public class LoanController {
 	private LoanService loanService;
 	
 	@GetMapping
-	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<List<Loan>> getAll() {
 		List<Loan> loans = this.loanService.getAllLoans();
 		return ResponseEntity.ok(loans);
 	}
 	
 	@GetMapping("/{id}")
-	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<Loan> getLoanById(@PathVariable Integer id) {
 		Loan loan = this.loanService.getLoanById(id);
 		
@@ -47,7 +47,7 @@ public class LoanController {
 	}
 	
 	@PostMapping
-	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<Loan> add(@Valid @RequestBody Loan userBody) {
 		// TODO: if loan.item.availability is false, throw an error
 		
@@ -56,7 +56,7 @@ public class LoanController {
 	}
 	
 	@PutMapping("/{id}")
-	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<Loan> finish(@PathVariable Integer id, @Valid @RequestBody Loan loanBody){
 		Loan loan = this.loanService.finishLoan(id, loanBody);
 		if(loan == null) {
@@ -66,7 +66,7 @@ public class LoanController {
 	}
 	
 	@DeleteMapping("/{id}")
-	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Void> erase(@PathVariable Integer id) {
 		boolean t = this.loanService.delete(id);
 		

@@ -29,7 +29,7 @@ public class User {
 	private String cpf;
 	
 	@Column(name = "telephone")
-	@Size(min=8, max = 9)
+	@Size(min=8, max=9)
 	private String telephone;
 	
 	@Column(name = "email")
