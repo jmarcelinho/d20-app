@@ -57,6 +57,7 @@ public class GameController {
 	
 	
 	@GetMapping("/{id}")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<Game> getGameById(@PathVariable Integer id){
 		Game game = this.gameService.getGameById(id);
 		
